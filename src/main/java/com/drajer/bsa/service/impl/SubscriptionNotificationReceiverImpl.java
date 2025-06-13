@@ -113,6 +113,8 @@ public class SubscriptionNotificationReceiverImpl implements SubscriptionNotific
 
             Set<KnowledgeArtifactStatus> stat = arfts.getArtifactStatus();
 
+            logger.info(" Found {} Knowledge Artifacts for processing.", stat.size());
+
             for (KnowledgeArtifactStatus ks : stat) {
 
               if (ks.getIsActive().booleanValue()) {

@@ -364,7 +364,7 @@ public class LaunchController {
       logger.info("Received Launch Parameter::::: {}", StringEscapeUtils.escapeJava(launch));
       logger.info("Received FHIR Server Base URL::::: {}", StringEscapeUtils.escapeJava(iss));
       String uri =
-          "https"
+          request.getScheme()
               + "://"
               + request.getServerName()
               + ("http".equals(request.getScheme()) && request.getServerPort() == 80
