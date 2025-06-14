@@ -1,9 +1,9 @@
-package com.drajer.test;
+package java.test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import com.drajer.sof.model.ClientDetails;
-import com.drajer.test.util.TestUtils;
+import java.sof.model.ClientDetails;
+import test.util.TestUtils;
 import java.io.IOException;
 import java.util.List;
 import org.junit.Before;

@@ -1,4 +1,4 @@
-package com.drajer.sampleehr.service;
+package sampleehr.service;
 
 import java.io.BufferedOutputStream;
 import java.io.DataOutputStream;

@@ -1,4 +1,4 @@
-package com.drajer.eca.model;
+package java.eca.model;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -11,14 +11,14 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import com.drajer.eca.model.EventTypes.EcrActionTypes;
-import com.drajer.eca.model.EventTypes.JobStatus;
-import com.drajer.eca.model.EventTypes.WorkflowEvent;
-import com.drajer.ecrapp.model.Eicr;
-import com.drajer.ecrapp.service.WorkflowService;
-import com.drajer.ecrapp.util.ApplicationUtils;
-import com.drajer.sof.model.LaunchDetails;
-import com.drajer.test.util.TestUtils;
+import java.model.EventTypes.EcrActionTypes;
+import java.model.EventTypes.JobStatus;
+import java.model.EventTypes.WorkflowEvent;
+import java.ecrapp.model.Eicr;
+import java.ecrapp.service.WorkflowService;
+import java.ecrapp.util.ApplicationUtils;
+import java.sof.model.LaunchDetails;
+import test.util.TestUtils;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;

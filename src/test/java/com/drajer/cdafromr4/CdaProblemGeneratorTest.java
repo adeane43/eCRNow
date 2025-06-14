@@ -1,13 +1,13 @@
-package com.drajer.cdafromr4;
+package java.cdafromr4;
 
 import static org.junit.Assert.assertNotNull;
 
-import com.drajer.cda.utils.CdaGeneratorConstants;
-import com.drajer.cda.utils.CdaGeneratorUtils;
-import com.drajer.eca.model.PatientExecutionState;
-import com.drajer.sof.model.LaunchDetails;
-import com.drajer.sof.model.R4FhirData;
-import com.drajer.test.util.TestUtils;
+import java.cda.utils.CdaGeneratorConstants;
+import java.cda.utils.CdaGeneratorUtils;
+import java.model.PatientExecutionState;
+import java.sof.model.LaunchDetails;
+import java.sof.model.R4FhirData;
+import test.util.TestUtils;
 import java.util.Date;
 import java.util.TimeZone;
 import org.hl7.fhir.r4.model.CodeableConcept;

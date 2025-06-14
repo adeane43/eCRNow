@@ -1,9 +1,9 @@
-package com.drajer.sampleehr.controller;
+package sampleehr.controller;
 
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.drajer.sampleehr.service.EicrReceiverService;
+import sampleehr.service.EicrReceiverService;
 
 @RestController
 public class EicrReceiverController {

@@ -1,7 +1,7 @@
-package com.drajer.cdafromr4;
+package java.cdafromr4;
 
-import com.drajer.sof.model.R4FhirData;
-import com.drajer.test.util.TestUtils;
+import java.sof.model.R4FhirData;
+import test.util.TestUtils;
 import org.junit.Test;
 
 public class CdaChiefComplaintGeneratorTest extends BaseGeneratorTest {

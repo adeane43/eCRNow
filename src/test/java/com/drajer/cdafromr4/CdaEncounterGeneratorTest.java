@@ -1,12 +1,12 @@
-package com.drajer.cdafromr4;
+package java.cdafromr4;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import com.drajer.cda.utils.CdaGeneratorConstants;
-import com.drajer.cda.utils.CdaGeneratorUtils;
-import com.drajer.sof.model.R4FhirData;
-import com.drajer.test.util.TestUtils;
+import java.cda.utils.CdaGeneratorConstants;
+import java.cda.utils.CdaGeneratorUtils;
+import java.sof.model.R4FhirData;
+import test.util.TestUtils;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;

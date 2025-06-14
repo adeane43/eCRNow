@@ -2,7 +2,7 @@
 
 The eCRNow App can be configured for a healthcare setting following the instructions in the document 
 
-https://github.com/drajer-health/eCRNow/blob/Release-3.0/documents/eCR%20Now%20App%20Configuration%20Guide_Release3.0.docx
+https://github.health/eCRNow/blob/Release-3.0/documents/eCR%20Now%20App%20Configuration%20Guide_Release3.0.docx
 
 # 2. Application.Properties available for configuration #
 

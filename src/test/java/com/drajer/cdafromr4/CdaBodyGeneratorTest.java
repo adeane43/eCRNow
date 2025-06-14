@@ -1,8 +1,8 @@
-package com.drajer.cdafromr4;
+package java.cdafromr4;
 
-import com.drajer.cda.utils.CdaGeneratorConstants;
-import com.drajer.sof.model.R4FhirData;
-import com.drajer.test.util.TestUtils;
+import java.cda.utils.CdaGeneratorConstants;
+import java.sof.model.R4FhirData;
+import test.util.TestUtils;
 import org.hl7.fhir.r4.model.Patient;
 import org.junit.Test;
 

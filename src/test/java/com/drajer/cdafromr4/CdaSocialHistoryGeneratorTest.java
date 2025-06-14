@@ -1,11 +1,11 @@
-package com.drajer.cdafromr4;
+package java.cdafromr4;
 
 import static org.junit.Assert.assertNotNull;
 
-import com.drajer.bsa.utils.R3ToR2DataConverterUtils;
-import com.drajer.cda.utils.CdaGeneratorUtils;
-import com.drajer.sof.model.R4FhirData;
-import com.drajer.test.util.TestUtils;
+import java.bsa.utils.R3ToR2DataConverterUtils;
+import java.cda.utils.CdaGeneratorUtils;
+import java.sof.model.R4FhirData;
+import test.util.TestUtils;
 import java.util.*;
 import org.hl7.fhir.r4.model.*;
 import org.junit.Test;

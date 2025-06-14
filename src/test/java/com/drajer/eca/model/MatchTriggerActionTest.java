@@ -1,4 +1,4 @@
-package com.drajer.eca.model;
+package java.eca.model;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -6,15 +6,15 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.eq;
 import static org.mockito.Mockito.when;
 
-import com.drajer.eca.model.EventTypes.JobStatus;
-import com.drajer.eca.model.EventTypes.WorkflowEvent;
-import com.drajer.ecrapp.service.WorkflowService;
-import com.drajer.ecrapp.util.ApplicationUtils;
-import com.drajer.sof.model.Dstu2FhirData;
-import com.drajer.sof.model.LaunchDetails;
-import com.drajer.sof.model.R4FhirData;
-import com.drajer.sof.service.TriggerQueryDstu2Bundle;
-import com.drajer.sof.service.TriggerQueryService;
+import java.model.EventTypes.JobStatus;
+import java.model.EventTypes.WorkflowEvent;
+import java.ecrapp.service.WorkflowService;
+import java.ecrapp.util.ApplicationUtils;
+import java.sof.model.Dstu2FhirData;
+import java.sof.model.LaunchDetails;
+import java.sof.model.R4FhirData;
+import java.sof.service.TriggerQueryDstu2Bundle;
+import java.sof.service.TriggerQueryService;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Before;

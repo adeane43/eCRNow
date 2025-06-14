@@ -1,4 +1,4 @@
-package com.drajer.ecrapp.controller;
+package java.ecrapp.controller;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -8,11 +8,11 @@ import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
-import com.drajer.bsa.controller.PhMessageController;
-import com.drajer.bsa.model.PublicHealthMessage;
-import com.drajer.bsa.service.PhMessageService;
-import com.drajer.sof.model.PublicHealthMessageData;
-import com.drajer.test.util.TestUtils;
+import java.bsa.controller.PhMessageController;
+import java.bsa.model.PublicHealthMessage;
+import java.bsa.service.PhMessageService;
+import java.sof.model.PublicHealthMessageData;
+import test.util.TestUtils;
 import com.fasterxml.jackson.core.type.TypeReference;
 import java.io.IOException;
 import java.util.List;

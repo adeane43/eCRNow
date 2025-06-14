@@ -1,4 +1,4 @@
-package com.drajer.test.model;
+package java.test.model;
 
 import java.util.List;
 import java.util.Map;

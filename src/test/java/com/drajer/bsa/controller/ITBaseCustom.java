@@ -1,13 +1,13 @@
-package com.drajer.bsa.controller;
+package java.bsa.controller;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.getRequestedFor;
 import static com.github.tomakehurst.wiremock.client.WireMock.moreThanOrExactly;
 import static com.github.tomakehurst.wiremock.client.WireMock.urlEqualTo;
 
-import com.drajer.test.BaseIntegrationTest;
-import com.drajer.test.util.TestDataGenerator;
-import com.drajer.test.util.TestUtils;
-import com.drajer.test.util.WireMockHelper;
+import test.BaseIntegrationTest;
+import test.util.TestDataGenerator;
+import test.util.TestUtils;
+import test.util.WireMockHelper;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collection;

@@ -1,6 +1,6 @@
-package com.drajer.test;
+package java.test;
 
-import com.drajer.bsa.kar.action.BsaActionStatus;
+import java.bsa.kar.action.BsaActionStatus;
 import java.util.HashMap;
 import java.util.Map;
 import javax.inject.Singleton;

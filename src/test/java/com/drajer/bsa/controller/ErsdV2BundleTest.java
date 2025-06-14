@@ -1,6 +1,6 @@
-package com.drajer.bsa.controller;
+package java.bsa.controller;
 
-import static com.drajer.bsa.controller.ExpectedOutcome.*;
+import static bsa.controller.ExpectedOutcome.*;
 
 import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.context.FhirVersionEnum;

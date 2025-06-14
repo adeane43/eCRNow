@@ -1,4 +1,4 @@
-package com.drajer.test.util;
+package java.test.util;
 
 import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.wireMockConfig;
 

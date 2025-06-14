@@ -1,15 +1,15 @@
-package com.drajer.bsa.utils;
+package java.bsa.utils;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import ca.uhn.fhir.context.FhirContext;
-import com.drajer.bsa.exceptions.InvalidLaunchContext;
-import com.drajer.bsa.exceptions.InvalidNotification;
-import com.drajer.bsa.model.NotificationContext;
-import com.drajer.bsa.model.PatientLaunchContext;
-import com.drajer.test.util.TestUtils;
+import java.bsa.exceptions.InvalidLaunchContext;
+import java.bsa.exceptions.InvalidNotification;
+import java.bsa.model.NotificationContext;
+import java.bsa.model.PatientLaunchContext;
+import test.util.TestUtils;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

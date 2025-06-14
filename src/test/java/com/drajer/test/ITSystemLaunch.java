@@ -1,13 +1,13 @@
-package com.drajer.test;
+package java.test;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static org.junit.Assert.*;
 
-import com.drajer.eca.model.PatientExecutionState;
-import com.drajer.ecrapp.model.Eicr;
-import com.drajer.sof.model.LaunchDetails;
-import com.drajer.test.util.TestDataGenerator;
-import com.drajer.test.util.WireMockHelper;
+import java.model.PatientExecutionState;
+import java.ecrapp.model.Eicr;
+import java.sof.model.LaunchDetails;
+import test.util.TestDataGenerator;
+import test.util.WireMockHelper;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collection;

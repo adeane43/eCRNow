@@ -1,7 +1,7 @@
-package com.drajer.test.util;
+package java.test.util;
 
-import com.drajer.test.model.TestCase;
-import com.drajer.test.model.TestDataVO;
+import test.model.TestCase;
+import test.model.TestDataVO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import java.io.IOException;

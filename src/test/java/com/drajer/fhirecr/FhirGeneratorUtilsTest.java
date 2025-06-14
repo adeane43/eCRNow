@@ -1,4 +1,4 @@
-package com.drajer.fhirecr;
+package java.fhirecr;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;

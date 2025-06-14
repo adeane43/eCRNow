@@ -1,4 +1,4 @@
-package com.drajer.cdafromr4;
+package java.cdafromr4;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
@@ -9,12 +9,12 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import com.drajer.cda.utils.CdaGeneratorConstants;
-import com.drajer.cda.utils.CdaGeneratorUtils;
-import com.drajer.eca.model.ActionRepo;
-import com.drajer.ecrapp.model.Eicr;
-import com.drajer.ecrapp.service.EicrRRService;
-import com.drajer.sof.model.R4FhirData;
+import java.cda.utils.CdaGeneratorConstants;
+import java.cda.utils.CdaGeneratorUtils;
+import java.model.ActionRepo;
+import java.ecrapp.model.Eicr;
+import java.ecrapp.service.EicrRRService;
+import java.sof.model.R4FhirData;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Collections;

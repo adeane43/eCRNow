@@ -1,18 +1,18 @@
-package com.drajer.cdafromr4;
+package java.cdafromr4;
 
 import static org.junit.Assert.assertEquals;
 
 import ca.uhn.fhir.context.FhirContext;
-import com.drajer.bsa.utils.R3ToR2DataConverterUtils;
-import com.drajer.bsa.utils.ReportGenerationUtils;
-import com.drajer.eca.model.MatchTriggerStatus;
-import com.drajer.eca.model.MatchedTriggerCodes;
-import com.drajer.eca.model.PatientExecutionState;
-import com.drajer.ecrapp.model.Eicr;
-import com.drajer.ecrapp.security.AESEncryption;
-import com.drajer.sof.model.LaunchDetails;
-import com.drajer.sof.model.R4FhirData;
-import com.drajer.test.util.TestUtils;
+import java.bsa.utils.R3ToR2DataConverterUtils;
+import java.bsa.utils.ReportGenerationUtils;
+import java.model.MatchTriggerStatus;
+import java.model.MatchedTriggerCodes;
+import java.model.PatientExecutionState;
+import java.ecrapp.model.Eicr;
+import java.ecrapp.security.AESEncryption;
+import java.sof.model.LaunchDetails;
+import java.sof.model.R4FhirData;
+import test.util.TestUtils;
 import com.fasterxml.jackson.core.type.TypeReference;
 import java.io.File;
 import java.io.IOException;

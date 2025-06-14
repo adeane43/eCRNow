@@ -9,7 +9,7 @@
 		<version>2.3.0.RELEASE</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.drajer</groupId>
+	<groupId>/groupId>
 	<artifactId>sample-ehr</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>

@@ -1,13 +1,13 @@
-package com.drajer.ecrapp.dao.impl;
+package java.ecrapp.dao.impl;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.fail;
 
-import com.drajer.ecrapp.config.SpringConfiguration;
-import com.drajer.ecrapp.model.Eicr;
-import com.drajer.test.util.TestUtils;
+import java.ecrapp.config.SpringConfiguration;
+import java.ecrapp.model.Eicr;
+import test.util.TestUtils;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.List;

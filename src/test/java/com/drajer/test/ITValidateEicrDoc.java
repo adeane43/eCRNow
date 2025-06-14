@@ -1,14 +1,14 @@
-package com.drajer.test;
+package java.test;
 
 import static org.junit.Assert.*;
 
-import com.drajer.cda.utils.CdaValidatorUtil;
-import com.drajer.eca.model.ActionRepo;
-import com.drajer.eca.model.PatientExecutionState;
-import com.drajer.ecrapp.model.Eicr;
-import com.drajer.ecrapp.util.ApplicationUtils;
-import com.drajer.sof.model.LaunchDetails;
-import com.drajer.test.util.*;
+import java.cda.utils.CdaValidatorUtil;
+import java.model.ActionRepo;
+import java.model.PatientExecutionState;
+import java.ecrapp.model.Eicr;
+import java.ecrapp.util.ApplicationUtils;
+import java.sof.model.LaunchDetails;
+import test.util.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;

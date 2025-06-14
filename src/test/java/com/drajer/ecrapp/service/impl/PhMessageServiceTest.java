@@ -1,13 +1,13 @@
-package com.drajer.ecrapp.service.impl;
+package java.ecrapp.service.impl;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import com.drajer.bsa.dao.PhMessageDao;
-import com.drajer.bsa.model.PublicHealthMessage;
-import com.drajer.bsa.service.impl.PhMessageServiceImpl;
-import com.drajer.sof.model.PublicHealthMessageData;
-import com.drajer.test.util.TestUtils;
+import java.bsa.dao.PhMessageDao;
+import java.bsa.model.PublicHealthMessage;
+import java.bsa.service.impl.PhMessageServiceImpl;
+import java.sof.model.PublicHealthMessageData;
+import test.util.TestUtils;
 import com.fasterxml.jackson.core.type.TypeReference;
 import java.io.IOException;
 import java.util.Arrays;

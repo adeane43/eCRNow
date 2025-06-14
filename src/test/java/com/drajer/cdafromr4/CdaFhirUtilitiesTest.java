@@ -1,4 +1,4 @@
-package com.drajer.cdafromr4;
+package java.cdafromr4;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertFalse;
@@ -7,8 +7,8 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import com.drajer.cda.utils.CdaGeneratorConstants;
-import com.drajer.test.util.TestUtils;
+import java.cda.utils.CdaGeneratorConstants;
+import test.util.TestUtils;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.math.BigDecimal;

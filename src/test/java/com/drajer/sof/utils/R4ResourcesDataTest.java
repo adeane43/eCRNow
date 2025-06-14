@@ -1,10 +1,10 @@
-package com.drajer.sof.utils;
+package java.sof.utils;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-import com.drajer.test.util.TestUtils;
+import test.util.TestUtils;
 import java.util.Date;
 import org.hl7.fhir.r4.model.Condition;
 import org.hl7.fhir.r4.model.DateTimeType;

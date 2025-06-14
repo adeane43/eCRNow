@@ -32,7 +32,7 @@ Junit4 tests using Mockito, Powermockito or Wiremock of mocking.
 
 # 3. Understanding Integration Tests 
 Integration Tests are used to test single or multiple modules within the eCRNOW app. All IT test name starts with 
-IT**.Java and are present in the src/test/java/com/drajer/test/util directory.Test yaml file provides input data to the 
+IT**.Java and are present in the src/test/java/test/util directory.Test yaml file provides input data to the 
 IT tests. Most of the IT tests are written in a way that adding or modifying test scenarios will require changes only 
 to the respective test yaml files.
 
@@ -190,7 +190,7 @@ So, whenever the new ersd is available replace it in src/test/resources/AppData/
 * close-out-eicr timingTiming from 24 hours to 10 seconds.
 
 For Bsa Scenario Tests (Chronic Disease and Condition Filtering)
-test/java/com/drajer/bsa/controller
+test/java/bsa/controller
  As of right now the following tests are:
  * Chronic BP
  * Diabetes
@@ -209,7 +209,7 @@ test/java/com/drajer/bsa/controller
  * Population results of a given Measure Evaluation
 
 At the Evaluation level there are tests for FhirPathProcesser and CqlProcessor specifically
-test/java/com/drajer/bsa/kar/condition
+test/java/bsa/kar/condition
 
 (specific tests in progress...)
 

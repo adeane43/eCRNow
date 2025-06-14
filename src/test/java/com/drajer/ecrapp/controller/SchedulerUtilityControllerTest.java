@@ -1,9 +1,9 @@
-package com.drajer.ecrapp.controller;
+package java.ecrapp.controller;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
-import com.drajer.ecrapp.util.ScheduledTaskUtil;
+import java.ecrapp.util.ScheduledTaskUtil;
 import java.io.IOException;
 import org.junit.Before;
 import org.junit.Test;

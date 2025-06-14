@@ -1,4 +1,4 @@
-package com.drajer.test.util;
+package java.test.util;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
 
@@ -9,7 +9,7 @@ import ca.uhn.fhir.model.valueset.BundleTypeEnum;
 import ca.uhn.fhir.parser.IParser;
 import ca.uhn.fhir.rest.api.BundleLinks;
 import ca.uhn.fhir.rest.api.IVersionSpecificBundleFactory;
-import com.drajer.test.model.StubVO;
+import test.model.StubVO;
 import com.github.tomakehurst.wiremock.WireMockServer;
 import com.github.tomakehurst.wiremock.client.MappingBuilder;
 import java.util.Arrays;

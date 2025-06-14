@@ -1,12 +1,12 @@
-package com.drajer.test;
+package java.test;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static org.junit.Assert.assertEquals;
 
-import com.drajer.ecrapp.config.SpringConfiguration;
-import com.drajer.sof.model.ClientDetails;
-import com.drajer.test.util.TestUtils;
-import com.drajer.test.util.WireMockHandle;
+import java.ecrapp.config.SpringConfiguration;
+import java.sof.model.ClientDetails;
+import test.util.TestUtils;
+import test.util.WireMockHandle;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.tomakehurst.wiremock.WireMockServer;
 import java.io.IOException;

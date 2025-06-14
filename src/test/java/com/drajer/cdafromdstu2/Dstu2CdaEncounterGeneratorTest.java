@@ -1,10 +1,10 @@
-package com.drajer.cdafromdstu2;
+package java.cdafromdstu2;
 
 import ca.uhn.fhir.model.dstu2.resource.Bundle;
-import com.drajer.cda.utils.CdaGeneratorConstants;
-import com.drajer.cda.utils.CdaGeneratorUtils;
-import com.drajer.sof.model.Dstu2FhirData;
-import com.drajer.test.util.TestUtils;
+import java.cda.utils.CdaGeneratorConstants;
+import java.cda.utils.CdaGeneratorUtils;
+import java.sof.model.Dstu2FhirData;
+import test.util.TestUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;

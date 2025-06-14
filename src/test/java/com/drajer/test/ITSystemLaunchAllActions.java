@@ -1,18 +1,20 @@
-package com.drajer.test;
+package java.test;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static org.apache.commons.text.StringEscapeUtils.escapeJson;
 import static org.junit.Assert.*;
 import static org.junit.Assert.assertTrue;
 
-import com.drajer.eca.model.*;
-import com.drajer.eca.model.EventTypes.JobStatus;
-import com.drajer.ecrapp.model.Eicr;
-import com.drajer.ecrapp.model.ReportabilityResponse;
-import com.drajer.sof.model.LaunchDetails;
-import com.drajer.test.util.TestDataGenerator;
-import com.drajer.test.util.TestUtils;
-import com.drajer.test.util.WireMockHelper;
+import eca.model.*;
+
+import java.model.*;
+import java.model.EventTypes.JobStatus;
+import java.ecrapp.model.Eicr;
+import java.ecrapp.model.ReportabilityResponse;
+import java.sof.model.LaunchDetails;
+import test.util.TestDataGenerator;
+import test.util.TestUtils;
+import test.util.WireMockHelper;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import java.io.IOException;
 import java.net.MalformedURLException;

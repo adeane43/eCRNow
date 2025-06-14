@@ -1,4 +1,4 @@
-package com.drajer.bsa.ehr.subscriptions;
+package java.bsa.ehr.subscriptions;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -6,7 +6,7 @@ import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.parser.IParser;
 import ca.uhn.fhir.parser.JsonParser;
 import ca.uhn.fhir.parser.LenientErrorHandler;
-import com.drajer.bsa.ehr.subscriptions.impl.SubscriptionGeneratorImpl;
+import java.bsa.ehr.subscriptions.impl.SubscriptionGeneratorImpl;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

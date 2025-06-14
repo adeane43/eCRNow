@@ -9,7 +9,7 @@ For Release 2.X of the App:
 
 Step 1. EHR vendor has to develop an implementation of the interface specified in
 
-AuthorizationService in com.drajer.ecrapp.security package. 
+AuthorizationService in ecrapp.security package. 
 
 A sample implementation is provided in SampleAuthorizationServiceImpl.java
 
@@ -29,9 +29,9 @@ For Release 3.X of the App:
 
 Step 1. EHR vendor has to develop an implementation of the interface specified in
 
-RestApiAuthorizationHeaderIf in com.drajer.bsa.auth 
+RestApiAuthorizationHeaderIf in bsa.auth 
 
-A sample implementation is provided in SampleRestApiAuthorizer.java in com.drajer.bsa.auth.impl
+A sample implementation is provided in SampleRestApiAuthorizer.java in bsa.auth.impl
 
 Step 2. Specify the implementation class name in the application.properties file so that it can be injected into the workflow.
 
@@ -50,8 +50,8 @@ If you want to protect the eCRNow APIs using security tokens that are sent as pa
 the property token.validator.class in the application.properties file.
 
 This class will be invoked as part of the filter chain and is configured in the WebSecurityConfig.java file in 
-com.drajer.ecrapp.config
+ecrapp.config
 
-A sample implementation of the OncePerRequestFilter is provided for reference in the TokenFilter.java in com.drajer.ecrapp.security package.
+A sample implementation of the OncePerRequestFilter is provided for reference in the TokenFilter.java in ecrapp.security package.
 
 

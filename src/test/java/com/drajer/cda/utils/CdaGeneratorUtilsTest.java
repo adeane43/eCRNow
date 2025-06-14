@@ -1,4 +1,4 @@
-package com.drajer.cda.utils;
+package java.cda.utils;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;

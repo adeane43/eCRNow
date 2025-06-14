@@ -1,18 +1,18 @@
-package com.drajer.ecrapp.controller;
+package java.ecrapp.controller;
 
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.doThrow;
 
-import com.drajer.ecrapp.model.Eicr;
-import com.drajer.ecrapp.service.EicrRRService;
+import java.ecrapp.model.Eicr;
+import java.ecrapp.service.EicrRRService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.json.JSONObject;
 import org.junit.Test;
 import org.junit.runner.RunWith;

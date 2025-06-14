@@ -1,4 +1,4 @@
-package com.drajer.sof.utils;
+package java.sof.utils;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -12,9 +12,9 @@ import ca.uhn.fhir.rest.client.api.IGenericClient;
 import ca.uhn.fhir.rest.client.api.ServerValidationModeEnum;
 import ca.uhn.fhir.rest.gclient.IQuery;
 import ca.uhn.fhir.rest.gclient.IUntypedQuery;
-import com.drajer.ecrapp.fhir.utils.FHIRRetryTemplate;
-import com.drajer.sof.model.LaunchDetails;
-import com.drajer.test.util.TestUtils;
+import java.ecrapp.fhir.utils.FHIRRetryTemplate;
+import java.sof.model.LaunchDetails;
+import test.util.TestUtils;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import java.io.IOException;

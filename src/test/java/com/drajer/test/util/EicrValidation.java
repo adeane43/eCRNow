@@ -1,8 +1,8 @@
-package com.drajer.test.util;
+package java.test.util;
 
 import static org.junit.Assert.*;
 
-import com.drajer.cda.utils.CdaValidatorUtil;
+import java.cda.utils.CdaValidatorUtil;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;

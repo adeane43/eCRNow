@@ -62,7 +62,7 @@ The routing module is used to submit/transmit the eICR created to the public hea
 | validate.eicr.fhir=false                     | Allows the validation of a eICR based on ECR FHIR IG when set to true.  
 
 # 3. eCRNow-UI Project and its relationship to eCRNow:
-The eCRNow-UI project and application is used to configure the eCRNow App. Although the UI is not mandatory to be used, it is preferrable as it makes it easier to configure the eCRNow App. The eCRNow-UI repository can be found here: https://github.com/drajer-health/eCRNow-UI. The instructions to build, deploy and start the eCRNow-UI is present in the eCRNow-UI project. The eCRNow App Configuration Guide is present in the eCRNow App documents folder which contains the instructions on how to configure the eCRNow App.
+The eCRNow-UI project and application is used to configure the eCRNow App. Although the UI is not mandatory to be used, it is preferrable as it makes it easier to configure the eCRNow App. The eCRNow-UI repository can be found here: https://github.health/eCRNow-UI. The instructions to build, deploy and start the eCRNow-UI is present in the eCRNow-UI project. The eCRNow App Configuration Guide is present in the eCRNow App documents folder which contains the instructions on how to configure the eCRNow App.
 
 
 # 4. Build and Deploy #
@@ -82,7 +82,7 @@ The following technologies should have been installed on your machine where you 
 
 1. Clone the repository
 
-```git clone https://github.com/drajer-health/eCRNow.git```
+```git clone https://github.health/eCRNow.git```
 
 2. Create a PostgresSQL database that you will use for the project.
 
@@ -200,13 +200,13 @@ The app supports three different launch mechanisms.
 
 The following documents can be used to configure the app based on the specific versions used.
 
-* [eCRNow App version 2.X Configuration Guide](https://github.com/drajer-health/eCRNow/blob/master/documents/eCR%20Now%20App%20Configuration%20Guide_v2.docx)
+* [eCRNow App version 2.X Configuration Guide](https://github.health/eCRNow/blob/master/documents/eCR%20Now%20App%20Configuration%20Guide_v2.docx)
 
-* [eCRNow App version 3.X Configuration Guide](https://github.com/drajer-health/eCRNow/blob/master/documents/eCR%20Now%20App%20Configuration%20Guide_Release3.0.docx)
+* [eCRNow App version 3.X Configuration Guide](https://github.health/eCRNow/blob/master/documents/eCR%20Now%20App%20Configuration%20Guide_Release3.0.docx)
 
 # 5. Production Deployment Considerations:
 Organizations implementing in production settings should consider the following:
-1. Properly securing the app user interface if it is used within the enterprise and protecting access following the [Security Guidance](https://github.com/drajer-health/eCRNow/blob/master/SecurityConfiguration.md)
+1. Properly securing the app user interface if it is used within the enterprise and protecting access following the [Security Guidance](https://github.health/eCRNow/blob/master/SecurityConfiguration.md)
 2. Implement organization policies around database settings (ports), schemas, encryption.
-3. Implement performance improvements using [Off Hour Scheduling](https://github.com/drajer-health/eCRNow/blob/master/OffHourConfiguration.md) and [Custom Query Configuration](https://github.com/drajer-health/eCRNow/blob/master/CustomQueryConfiguration.md).
+3. Implement performance improvements using [Off Hour Scheduling](https://github.health/eCRNow/blob/master/OffHourConfiguration.md) and [Custom Query Configuration](https://github.health/eCRNow/blob/master/CustomQueryConfiguration.md).
 

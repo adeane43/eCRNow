@@ -1,10 +1,10 @@
-package com.drajer.bsa.service.impl;
+package java.bsa.service.impl;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
-import com.drajer.bsa.dao.TimeZoneDao;
-import com.drajer.ecrapp.config.QueryReaderConfig;
+import java.bsa.dao.TimeZoneDao;
+import java.ecrapp.config.QueryReaderConfig;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

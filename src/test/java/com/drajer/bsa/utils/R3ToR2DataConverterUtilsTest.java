@@ -1,4 +1,4 @@
-package com.drajer.bsa.utils;
+package java.bsa.utils;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
@@ -6,17 +6,17 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 
 import ca.uhn.fhir.context.FhirContext;
-import com.drajer.bsa.kar.action.BsaActionStatus;
-import com.drajer.bsa.kar.action.CheckTriggerCodeStatus;
-import com.drajer.bsa.kar.model.BsaAction;
-import com.drajer.bsa.model.BsaTypes.ActionType;
-import com.drajer.bsa.model.KarProcessingData;
-import com.drajer.eca.model.MatchedTriggerCodes;
-import com.drajer.ecrapp.security.AESEncryption;
-import com.drajer.sof.model.LaunchDetails;
-import com.drajer.sof.model.R4FhirData;
-import com.drajer.test.util.TestUtils;
-import com.drajer.test.util.Utility;
+import java.bsa.kar.action.BsaActionStatus;
+import java.bsa.kar.action.CheckTriggerCodeStatus;
+import java.bsa.kar.model.BsaAction;
+import java.bsa.model.BsaTypes.ActionType;
+import java.bsa.model.KarProcessingData;
+import java.model.MatchedTriggerCodes;
+import java.ecrapp.security.AESEncryption;
+import java.sof.model.LaunchDetails;
+import java.sof.model.R4FhirData;
+import test.util.TestUtils;
+import test.util.Utility;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
