@@ -2,6 +2,7 @@ package com.drajer.ecrapp.fhir.utils.ecrretry;
 
 import ca.uhn.fhir.rest.client.api.IGenericClient;
 import ca.uhn.fhir.rest.gclient.IGetPage;
+import ca.uhn.fhir.rest.gclient.IQuery;
 import ca.uhn.fhir.rest.gclient.IRead;
 import ca.uhn.fhir.rest.gclient.IUntypedQuery;
 import ca.uhn.fhir.rest.server.exceptions.BaseServerResponseException;
@@ -10,6 +11,7 @@ import com.drajer.ecrapp.fhir.utils.FHIRRetryTemplate;
 import com.drajer.ecrapp.fhir.utils.RetryableException;
 import com.drajer.sof.utils.FhirClient;
 import org.hl7.fhir.instance.model.api.IBaseBundle;
+import org.hl7.fhir.instance.model.api.IBaseResource;
 
 public class EcrFhirRetryClient extends FhirClient {
 
@@ -19,7 +21,8 @@ public class EcrFhirRetryClient extends FhirClient {
       IGenericClient parent,
       FHIRRetryTemplate fhirRetryTemplate,
       String requestId,
-      EventTypes.QueryType type) {
+      EventTypes.QueryType type
+  ) {
     super(parent, requestId, type);
     this.fhirRetryTemplate = fhirRetryTemplate;
   }
@@ -28,22 +31,17 @@ public class EcrFhirRetryClient extends FhirClient {
     return fhirRetryTemplate;
   }
 
-  @Override
   public IRead read() {
-    this.interceptor.reset();
+    interceptor.reset();
     return new EcrFhirRetryableRead(client.read(), this);
   }
 
-  @Override
   public IGetPage loadPage() {
-    this.interceptor.incrementPageNum();
     return new EcrFhirRetryablePage(client.loadPage(), this);
   }
 
-  @Override
   public <T extends IBaseBundle> IUntypedQuery<T> search() {
-    this.interceptor.reset();
-    return new EcrFhirRetryableSearch(client.search(), this);
+    return new EcrFhirRetryableSearch<>(client.search(), this);
   }
 
   public RuntimeException handleException(final Exception e, final String methodName) {

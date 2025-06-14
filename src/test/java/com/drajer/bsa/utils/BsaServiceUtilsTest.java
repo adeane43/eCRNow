@@ -1,11 +1,11 @@
-package java.bsa.utils;
+package com.drajer.bsa.utils;
 
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doThrow;
@@ -13,21 +13,21 @@ import static org.mockito.Mockito.mock;
 
 import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.parser.IParser;
-import java.bsa.dao.TimeZoneDao;
-import java.bsa.kar.action.CheckTriggerCodeStatusList;
-import java.bsa.kar.action.SubmitReport;
-import java.bsa.kar.model.BsaAction;
-import java.bsa.kar.model.FhirQueryFilter;
-import java.bsa.kar.model.KnowledgeArtifact;
-import java.bsa.kar.model.KnowledgeArtifactRepositorySystem;
-import java.bsa.model.BsaTypes;
-import java.bsa.model.BsaTypes.MessageType;
-import java.bsa.model.KarProcessingData;
-import java.bsa.service.KarParser;
-import java.model.MatchedTriggerCodes;
-import java.ecrapp.config.QueryReaderConfig;
-import test.util.TestUtils;
-import test.util.Utility;
+import com.drajer.bsa.dao.TimeZoneDao;
+import com.drajer.bsa.kar.action.CheckTriggerCodeStatusList;
+import com.drajer.bsa.kar.action.SubmitReport;
+import com.drajer.bsa.kar.model.BsaAction;
+import com.drajer.bsa.kar.model.FhirQueryFilter;
+import com.drajer.bsa.kar.model.KnowledgeArtifact;
+import com.drajer.bsa.kar.model.KnowledgeArtifactRepositorySystem;
+import com.drajer.bsa.model.BsaTypes;
+import com.drajer.bsa.model.BsaTypes.MessageType;
+import com.drajer.bsa.model.KarProcessingData;
+import com.drajer.bsa.service.KarParser;
+import com.drajer.eca.model.MatchedTriggerCodes;
+import com.drajer.ecrapp.config.QueryReaderConfig;
+import com.drajer.test.util.TestUtils;
+import com.drajer.test.util.Utility;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -310,7 +310,7 @@ public class BsaServiceUtilsTest {
     Bundle messageHeader = TestUtils.loadBundleFromFile("/Bsa/DocumentReferenceResource.json");
     List<Pair<String, String>> cdaDocument =
         bsaServiceUtils.saveCdaDocumentFromDocumentBundleToFile(
-                "/java/bsa/", "DocumentReference.xml", messageHeader);
+            "/bsa/", "DocumentReference.xml", messageHeader);
     assertNotNull(cdaDocument);
   }
 

@@ -1,9 +1,9 @@
-package java.ecrapp.controller;
+package com.drajer.ecrapp.controller;
 
 import static org.junit.Assert.*;
 
-import java.ecrapp.model.ScheduledTasks;
-import java.ecrapp.service.SchedulerService;
+import com.drajer.ecrapp.model.ScheduledTasks;
+import com.drajer.ecrapp.service.SchedulerService;
 import java.util.Arrays;
 import java.util.List;
 import org.junit.Before;

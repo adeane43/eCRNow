@@ -1,13 +1,13 @@
-package java.bsa.dao.impl;
+package com.drajer.bsa.dao.impl;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 
-import java.bsa.model.PublicHealthMessage;
-import java.sof.model.PublicHealthMessageData;
-import test.util.TestUtils;
+import com.drajer.bsa.model.PublicHealthMessage;
+import com.drajer.sof.model.PublicHealthMessageData;
+import com.drajer.test.util.TestUtils;
 import com.fasterxml.jackson.core.type.TypeReference;
 import java.util.Arrays;
 import java.util.List;

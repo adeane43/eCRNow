@@ -1,12 +1,12 @@
-package java.cda.utils;
+package com.drajer.cda.utils;
 
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.doThrow;
 
-import java.model.ActionRepo;
-import test.util.TestUtils;
+import com.drajer.eca.model.ActionRepo;
+import com.drajer.test.util.TestUtils;
 import java.lang.reflect.Constructor;
 import org.junit.Before;
 import org.junit.Test;

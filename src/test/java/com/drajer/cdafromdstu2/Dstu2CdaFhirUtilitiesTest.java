@@ -1,7 +1,7 @@
-package java.cdafromdstu2;
+package com.drajer.cdafromdstu2;
 
 import static ca.uhn.fhir.model.dstu2.valueset.NameUseEnum.OFFICIAL;
-import static java.cda.utils.CdaGeneratorConstants.*;
+import static com.drajer.cda.utils.CdaGeneratorConstants.*;
 import static com.helger.commons.mock.CommonsAssert.assertEquals;
 import static org.junit.Assert.*;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -24,8 +24,8 @@ import ca.uhn.fhir.model.dstu2.valueset.*;
 import ca.uhn.fhir.model.dstu2.valueset.IdentifierTypeCodesEnum;
 import ca.uhn.fhir.model.primitive.*;
 import ca.uhn.fhir.model.primitive.CodeDt;
-import java.cda.utils.CdaGeneratorConstants;
-import java.cda.utils.CdaGeneratorUtils;
+import com.drajer.cda.utils.CdaGeneratorConstants;
+import com.drajer.cda.utils.CdaGeneratorUtils;
 import java.math.BigDecimal;
 import java.util.*;
 import org.apache.commons.lang3.StringUtils;

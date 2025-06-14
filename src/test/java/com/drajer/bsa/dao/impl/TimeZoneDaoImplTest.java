@@ -1,4 +1,4 @@
-package java.bsa.dao.impl;
+package com.drajer.bsa.dao.impl;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.anyString;

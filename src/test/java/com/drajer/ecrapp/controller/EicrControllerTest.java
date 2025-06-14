@@ -1,11 +1,11 @@
-package java.ecrapp.controller;
+package com.drajer.ecrapp.controller;
 
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.doThrow;
 
-import java.ecrapp.model.Eicr;
-import java.ecrapp.service.EicrRRService;
+import com.drajer.ecrapp.model.Eicr;
+import com.drajer.ecrapp.service.EicrRRService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
 import java.util.ArrayList;

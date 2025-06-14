@@ -1,4 +1,4 @@
-package java.cdafromdstu2;
+package com.drajer.cdafromdstu2;
 
 import static org.junit.Assert.assertEquals;
 
@@ -9,16 +9,17 @@ import ca.uhn.fhir.model.dstu2.resource.Location;
 import ca.uhn.fhir.model.dstu2.resource.Organization;
 import ca.uhn.fhir.model.dstu2.resource.Patient;
 import ca.uhn.fhir.model.dstu2.resource.Practitioner;
-import java.ecrapp.model.Eicr;
-import java.ecrapp.security.AESEncryption;
-import java.sof.model.Dstu2FhirData;
-import java.sof.model.LaunchDetails;
-import test.util.TestUtils;
+import com.drajer.ecrapp.model.Eicr;
+import com.drajer.ecrapp.security.AESEncryption;
+import com.drajer.sof.model.Dstu2FhirData;
+import com.drajer.sof.model.LaunchDetails;
+import com.drajer.test.util.TestUtils;
 import com.fasterxml.jackson.core.type.TypeReference;
 import java.io.InputStream;
 import java.util.List;
 import java.util.TimeZone;
 import org.apache.commons.lang3.StringUtils;
+import org.hl7.fhir.dstu2.model.*;
 import org.hl7.fhir.instance.model.api.IBaseResource;
 import org.junit.Before;
 import org.powermock.core.classloader.annotations.PowerMockIgnore;
@@ -34,7 +35,7 @@ public class BaseGenerator {
   protected Bundle bundle;
 
   public static final Logger logger =
-      LoggerFactory.getLogger(cdafromr4.BaseGeneratorTest.class);
+      LoggerFactory.getLogger(com.drajer.cdafromr4.BaseGeneratorTest.class);
   public static final FhirContext fhirContext = FhirContext.forDstu2();
   public static final String EXCEPTION_READING_FILE = "Exception Reading File";
   protected static final String PATIENT_CDA_FILE = "CdaDstuTestData/Cda/Patient/Patient.xml";

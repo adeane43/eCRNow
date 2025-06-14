@@ -12,8 +12,10 @@ Compile / unmanagedSourceDirectories ++= Seq(
   baseDirectory.value / "src" / "main" / "java",
   baseDirectory.value / "src" / "main" / "scala"
 )
+
 Test / unmanagedSourceDirectories ++= Seq(
-  baseDirectory.value / "src" / "test"
+  baseDirectory.value / "src" / "test" / "java",
+  baseDirectory.value / "src" / "test" / "scala"
 )
 
 // Library dependencies
@@ -94,7 +96,7 @@ libraryDependencies ++= Seq(
 )
 
 // Main class for Spring Boot
-mainClass in Compile := Some("main.ecrApp")
+mainClass in Compile := Some("main.EcrApp")
 
 // Optional: Custom resolvers if needed
 resolvers ++= Seq(

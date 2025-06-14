@@ -1,4 +1,4 @@
-package java.bsa.kar.action;
+package com.drajer.bsa.kar.action;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;

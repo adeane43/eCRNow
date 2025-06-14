@@ -1,5 +1,6 @@
 package com.drajer.ecrapp.fhir.utils.ecrretry;
 
+import ca.uhn.fhir.model.api.IQueryParameterType;
 import ca.uhn.fhir.model.api.Include;
 import ca.uhn.fhir.rest.api.CacheControlDirective;
 import ca.uhn.fhir.rest.api.EncodingEnum;
@@ -7,10 +8,8 @@ import ca.uhn.fhir.rest.api.SearchStyleEnum;
 import ca.uhn.fhir.rest.api.SearchTotalModeEnum;
 import ca.uhn.fhir.rest.api.SortSpec;
 import ca.uhn.fhir.rest.api.SummaryEnum;
-import ca.uhn.fhir.rest.gclient.IBaseQuery;
-import ca.uhn.fhir.rest.gclient.IClientExecutable;
-import ca.uhn.fhir.rest.gclient.ICriterion;
 import ca.uhn.fhir.rest.gclient.IQuery;
+import ca.uhn.fhir.rest.gclient.ICriterion;
 import ca.uhn.fhir.rest.gclient.ISort;
 import ca.uhn.fhir.rest.gclient.IUntypedQuery;
 import ca.uhn.fhir.rest.param.DateRangeParam;
@@ -19,183 +18,173 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import org.apache.commons.text.StringEscapeUtils;
-import org.hl7.fhir.instance.model.api.IBaseResource;
+import org.hl7.fhir.instance.model.api.IBaseBundle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpMethod;
 
-public class EcrFhirRetryableSearch<K> implements IQuery<K>, IUntypedQuery<IQuery<K>> {
-  private IQuery<?> query;
+@SuppressWarnings({"rawtypes", "unchecked"})
+public class EcrFhirRetryableSearch<T extends IBaseBundle> implements IQuery<T>, IUntypedQuery<T> {
+  private IQuery<T> query;
   private final EcrFhirRetryClient client;
-  private IUntypedQuery<IQuery> untypedQuery;
+  private IUntypedQuery<T> untypedQuery;
   private static final Logger logger = LoggerFactory.getLogger(EcrFhirRetryableSearch.class);
   private static String url;
 
-  public EcrFhirRetryableSearch(final IUntypedQuery untypedQuery, final EcrFhirRetryClient client) {
+  public EcrFhirRetryableSearch(final IUntypedQuery<T> untypedQuery, final EcrFhirRetryClient client) {
     this.untypedQuery = untypedQuery;
     this.client = client;
   }
 
-  public EcrFhirRetryableSearch(final IQuery query, final EcrFhirRetryClient client) {
+  public EcrFhirRetryableSearch(final IQuery<T> query, final EcrFhirRetryClient client) {
     this.query = query;
     this.client = client;
   }
 
   @Override
-  public IBaseQuery where(Map theCriterion) {
+  public IQuery<T> andLogRequestAndResponse(boolean theLogRequestAndResponse) {
     throw new NotImplementedOperationException("The requested operation is not implemented");
   }
 
   @Override
-  public IBaseQuery whereMap(Map theRawMap) {
+  public IQuery<T> cacheControl(CacheControlDirective theCacheControlDirective) {
     throw new NotImplementedOperationException("The requested operation is not implemented");
   }
 
   @Override
-  public IClientExecutable andLogRequestAndResponse(boolean theLogRequestAndResponse) {
+  public IQuery<T> elementsSubset(String... theElements) {
     throw new NotImplementedOperationException("The requested operation is not implemented");
   }
 
   @Override
-  public IClientExecutable cacheControl(CacheControlDirective theCacheControlDirective) {
+  public IQuery<T> encoded(EncodingEnum theEncoding) {
     throw new NotImplementedOperationException("The requested operation is not implemented");
   }
 
   @Override
-  public IClientExecutable elementsSubset(String... theElements) {
+  public IQuery<T> encodedJson() {
     throw new NotImplementedOperationException("The requested operation is not implemented");
   }
 
   @Override
-  public IClientExecutable encoded(EncodingEnum theEncoding) {
+  public IQuery<T> encodedXml() {
     throw new NotImplementedOperationException("The requested operation is not implemented");
   }
 
   @Override
-  public IClientExecutable encodedJson() {
+  public IQuery<T> withAdditionalHeader(String theHeaderName, String theHeaderValue) {
     throw new NotImplementedOperationException("The requested operation is not implemented");
   }
 
   @Override
-  public IClientExecutable encodedXml() {
-    throw new NotImplementedOperationException("The requested operation is not implemented");
-  }
-
-  @Override
-  public IClientExecutable withAdditionalHeader(String theHeaderName, String theHeaderValue) {
-    throw new NotImplementedOperationException("The requested operation is not implemented");
-  }
-
-  @Override
-  public Object execute() {
+  public T execute() {
     return client
-        .getRetryTemplate()
-        .execute(
-            context -> {
-              try {
-                logger.info(
-                    "Retrying FHIR search url {}. Count {} ",
-                    StringEscapeUtils.escapeJava(url),
-                    context.getRetryCount());
-                return query.execute();
-              } catch (final Exception ex) {
-                throw client.handleException(ex, HttpMethod.GET.name());
-              }
-            },
-            null);
+            .getRetryTemplate()
+            .execute((context) -> {
+                      try {
+                        logger.info(
+                                "Retrying FHIR search url {}. Count {} ",
+                                StringEscapeUtils.escapeJava(url),
+                                context.getRetryCount());
+                        return query.execute();
+                      } catch (final Exception e) {
+                        throw client.handleException(e, HttpMethod.GET.name());
+                      }
+                    },
+                    null);
   }
 
   @Override
-  public IClientExecutable preferResponseType(Class theType) {
+  public IQuery<T> preferResponseType(Class theType) {
     throw new NotImplementedOperationException("The requested operation is not implemented");
   }
 
   @Override
-  public IClientExecutable preferResponseTypes(List theTypes) {
+  public IQuery<T> preferResponseTypes(List theTypes) {
     throw new NotImplementedOperationException("The requested operation is not implemented");
   }
 
   @Override
-  public IClientExecutable prettyPrint() {
+  public IQuery<T> prettyPrint() {
     throw new NotImplementedOperationException("The requested operation is not implemented");
   }
 
   @Override
-  public IClientExecutable summaryMode(SummaryEnum theSummary) {
+  public IQuery<T> summaryMode(SummaryEnum theSummary) {
     throw new NotImplementedOperationException("The requested operation is not implemented");
   }
 
   @Override
-  public IClientExecutable accept(String theHeaderValue) {
+  public IQuery<T> accept(String theHeaderValue) {
     throw new NotImplementedOperationException("The requested operation is not implemented");
   }
 
   @Override
-  public IQuery<IQuery> forAllResources() {
+  public IQuery<T>forAllResources() {
     throw new NotImplementedOperationException("The requested operation is not implemented");
   }
 
   @Override
-  public IQuery<IQuery> forResource(String theResourceName) {
+  public IQuery<T>forResource(String theResourceName) {
     throw new NotImplementedOperationException("The requested operation is not implemented");
   }
 
   @Override
-  public IQuery<IQuery> forResource(Class<? extends IBaseResource> theClass) {
+  public IQuery<T> forResource(Class theClass) {
     query = ((IUntypedQuery) query).forResource(theClass);
     return new EcrFhirRetryableSearch(query, client);
   }
 
   @Override
-  public IQuery<IQuery> byUrl(String theSearchUrl) {
+  public IQuery<T> byUrl(String theSearchUrl) {
     this.url = theSearchUrl;
-    return new EcrFhirRetryableSearch<>(untypedQuery.byUrl(theSearchUrl), client);
+    return untypedQuery.byUrl(theSearchUrl);
   }
 
   @Override
-  public IQuery and(ICriterion theCriterion) {
+  public IQuery<T>and(ICriterion theCriterion) {
     query = query.and(theCriterion);
     return new EcrFhirRetryableSearch(query, client);
   }
 
   @Override
-  public IQuery count(int theCount) {
+  public IQuery<T>count(int theCount) {
     query = query.count(theCount);
     return new EcrFhirRetryableSearch(query, client);
   }
 
   @Override
-  public IQuery offset(int i) {
+  public IQuery<T>offset(int i) {
     throw new NotImplementedOperationException("The requested operation is not implemented");
   }
 
   @Override
-  public IQuery include(Include theInclude) {
+  public IQuery<T>include(Include theInclude) {
     throw new NotImplementedOperationException("The requested operation is not implemented");
   }
 
   @Override
-  public IQuery lastUpdated(DateRangeParam theLastUpdated) {
+  public IQuery<T>lastUpdated(DateRangeParam theLastUpdated) {
     throw new NotImplementedOperationException("The requested operation is not implemented");
   }
 
   @Override
-  public IQuery limitTo(int theLimitTo) {
+  public IQuery<T>limitTo(int theLimitTo) {
     throw new NotImplementedOperationException("The requested operation is not implemented");
   }
 
   @Override
-  public IQuery returnBundle(Class theClass) {
+  public IQuery<T>returnBundle(Class theClass) {
     return new EcrFhirRetryableSearch(query.returnBundle(theClass), client);
   }
 
   @Override
-  public IQuery totalMode(SearchTotalModeEnum theTotalMode) {
+  public IQuery<T>totalMode(SearchTotalModeEnum theTotalMode) {
     throw new NotImplementedOperationException("The requested operation is not implemented");
   }
 
   @Override
-  public IQuery revInclude(Include theIncludeTarget) {
+  public IQuery<T>revInclude(Include theIncludeTarget) {
     throw new NotImplementedOperationException("The requested operation is not implemented");
   }
 
@@ -205,43 +194,53 @@ public class EcrFhirRetryableSearch<K> implements IQuery<K>, IUntypedQuery<IQuer
   }
 
   @Override
-  public IQuery sort(SortSpec theSortSpec) {
+  public IQuery<T>sort(SortSpec theSortSpec) {
     throw new NotImplementedOperationException("The requested operation is not implemented");
   }
 
   @Override
-  public IQuery usingStyle(SearchStyleEnum theStyle) {
+  public IQuery<T>usingStyle(SearchStyleEnum theStyle) {
     throw new NotImplementedOperationException("The requested operation is not implemented");
   }
 
   @Override
-  public IQuery where(ICriterion theCriterion) {
+  public IQuery<T>where(ICriterion theCriterion) {
     query = query.where(theCriterion);
     return new EcrFhirRetryableSearch(query, client);
   }
 
   @Override
-  public IQuery withAnyProfile(Collection theProfileUris) {
+  public IQuery<T>withAnyProfile(Collection theProfileUris) {
     throw new NotImplementedOperationException("The requested operation is not implemented");
   }
 
   @Override
-  public IQuery withIdAndCompartment(String theResourceId, String theCompartmentName) {
+  public IQuery<T>withIdAndCompartment(String theResourceId, String theCompartmentName) {
     throw new NotImplementedOperationException("The requested operation is not implemented");
   }
 
   @Override
-  public IQuery withProfile(String theProfileUri) {
+  public IQuery<T>withProfile(String theProfileUri) {
     throw new NotImplementedOperationException("The requested operation is not implemented");
   }
 
   @Override
-  public IQuery withSecurity(String theSystem, String theCode) {
+  public IQuery<T>withSecurity(String theSystem, String theCode) {
     throw new NotImplementedOperationException("The requested operation is not implemented");
   }
 
   @Override
-  public IQuery withTag(String theSystem, String theCode) {
+  public IQuery<T>withTag(String theSystem, String theCode) {
+    throw new NotImplementedOperationException("The requested operation is not implemented");
+  }
+
+  @Override
+  public IQuery<T> where(Map<String, List<IQueryParameterType>> theCriterion) {
+    throw new NotImplementedOperationException("The requested operation is not implemented");
+  }
+
+  @Override
+  public IQuery<T> whereMap(Map<String, List<String>> theRawMap) {
     throw new NotImplementedOperationException("The requested operation is not implemented");
   }
 }

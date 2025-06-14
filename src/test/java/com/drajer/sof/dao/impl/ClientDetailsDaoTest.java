@@ -1,12 +1,12 @@
-package java.sof.dao.impl;
+package com.drajer.sof.dao.impl;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.ecrapp.config.SpringConfiguration;
-import java.sof.model.ClientDetails;
-import test.util.TestUtils;
+import com.drajer.ecrapp.config.SpringConfiguration;
+import com.drajer.sof.model.ClientDetails;
+import com.drajer.test.util.TestUtils;
 import java.util.List;
 import org.junit.Before;
 import org.junit.Test;

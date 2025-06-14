@@ -1,4 +1,4 @@
-package java.cdafromr4;
+package com.drajer.cdafromr4;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

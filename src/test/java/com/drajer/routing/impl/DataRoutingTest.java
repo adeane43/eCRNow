@@ -1,4 +1,4 @@
-package java.routing.impl;
+package com.drajer.routing.impl;
 
 import static org.junit.Assert.fail;
 import static org.mockito.Mockito.any;
@@ -7,7 +7,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import java.sof.model.LaunchDetails;
+import com.drajer.sof.model.LaunchDetails;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import java.io.IOException;

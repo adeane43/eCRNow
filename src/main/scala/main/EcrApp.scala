@@ -18,9 +18,8 @@ import org.springframework.web.client.RestTemplate
 
 import java.time.Instant
 import java.util.{Date, TimeZone}
-import scala.compiletime.uninitialized
 
-object Main {
+object EcrApp {
   /**
    * Main entry point for the ECR Application.
    *

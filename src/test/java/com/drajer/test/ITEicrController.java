@@ -1,9 +1,9 @@
-package java.test;
+package com.drajer.test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import java.ecrapp.model.Eicr;
+import com.drajer.ecrapp.model.Eicr;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import java.util.HashMap;
 import java.util.List;

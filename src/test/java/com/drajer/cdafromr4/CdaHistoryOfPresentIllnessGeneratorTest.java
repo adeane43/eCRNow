@@ -1,10 +1,10 @@
-package java.cdafromr4;
+package com.drajer.cdafromr4;
 
-import java.bsa.utils.R3ToR2DataConverterUtils;
-import java.cda.utils.CdaGeneratorConstants;
-import java.cda.utils.CdaGeneratorUtils;
-import java.sof.model.R4FhirData;
-import test.util.TestUtils;
+import com.drajer.bsa.utils.R3ToR2DataConverterUtils;
+import com.drajer.cda.utils.CdaGeneratorConstants;
+import com.drajer.cda.utils.CdaGeneratorUtils;
+import com.drajer.sof.model.R4FhirData;
+import com.drajer.test.util.TestUtils;
 import java.util.*;
 import org.hl7.fhir.r4.model.Bundle;
 import org.hl7.fhir.r4.model.Resource;

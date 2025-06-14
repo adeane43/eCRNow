@@ -1,19 +1,15 @@
-package java.test;
+package com.drajer.test;
 
 import static org.junit.Assert.*;
 import static org.junit.Assert.assertTrue;
 
-import eca.model.*;
-
-import java.model.CreateEicrStatus;
-import java.model.EventTypes.JobStatus;
-import java.ecrapp.model.Eicr;
-import java.model.PatientExecutionState;
-import java.sof.model.LaunchDetails;
-import test.util.TestDataGenerator;
-import test.util.WireMockHelper;
+import com.drajer.eca.model.*;
+import com.drajer.eca.model.EventTypes.JobStatus;
+import com.drajer.ecrapp.model.Eicr;
+import com.drajer.sof.model.LaunchDetails;
+import com.drajer.test.util.TestDataGenerator;
+import com.drajer.test.util.WireMockHelper;
 import java.io.IOException;
-import java.model.MatchTriggerStatus;
 import java.util.*;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;

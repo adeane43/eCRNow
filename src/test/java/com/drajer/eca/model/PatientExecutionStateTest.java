@@ -1,10 +1,10 @@
-package java.eca.model;
+package com.drajer.eca.model;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
-import java.model.EventTypes.JobStatus;
+import com.drajer.eca.model.EventTypes.JobStatus;
 import java.util.Set;
 import org.junit.Before;
 import org.junit.Test;

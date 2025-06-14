@@ -3,11 +3,7 @@ package com.drajer.ecrapp.fhir.utils.ecrretry;
 import ca.uhn.fhir.rest.api.CacheControlDirective;
 import ca.uhn.fhir.rest.api.EncodingEnum;
 import ca.uhn.fhir.rest.api.SummaryEnum;
-import ca.uhn.fhir.rest.gclient.IClientExecutable<IBaseResource>;
-import ca.uhn.fhir.rest.gclient.IRead;
-import ca.uhn.fhir.rest.gclient.IReadExecutable;
-import ca.uhn.fhir.rest.gclient.IReadIfNoneMatch;
-import ca.uhn.fhir.rest.gclient.IReadTyped;
+import ca.uhn.fhir.rest.gclient.*;
 import ca.uhn.fhir.rest.server.exceptions.NotImplementedOperationException;
 import java.util.List;
 import org.hl7.fhir.instance.model.api.IBaseResource;
@@ -19,9 +15,9 @@ import org.springframework.http.HttpMethod;
 public class EcrFhirRetryableRead implements IRead, IReadTyped<IBaseResource>, IReadExecutable<IBaseResource> {
 
   private IRead readParent;
-  private IReadTyped readTypedParent;
-  private IReadExecutable readExecutableParent;
-  private EcrFhirRetryClient client;
+  private IReadTyped<IBaseResource> readTypedParent;
+  private IReadExecutable<IBaseResource> readExecutableParent;
+  private final EcrFhirRetryClient client;
 
   private static final Logger logger = LoggerFactory.getLogger(EcrFhirRetryableRead.class);
 
@@ -31,13 +27,13 @@ public class EcrFhirRetryableRead implements IRead, IReadTyped<IBaseResource>, I
     this.client = client;
   }
 
-  public EcrFhirRetryableRead(IReadTyped readTyped, EcrFhirRetryClient client) {
+  public EcrFhirRetryableRead(IReadTyped<IBaseResource> readTyped, EcrFhirRetryClient client) {
     super();
     this.readTypedParent = readTyped;
     this.client = client;
   }
 
-  public EcrFhirRetryableRead(IReadExecutable readExecutable, EcrFhirRetryClient client) {
+  public EcrFhirRetryableRead(IReadExecutable<IBaseResource> readExecutable, EcrFhirRetryClient client) {
     super();
     this.readExecutableParent = readExecutable;
     this.client = client;
@@ -54,73 +50,73 @@ public class EcrFhirRetryableRead implements IRead, IReadTyped<IBaseResource>, I
   }
 
   @Override
-  public IReadExecutable withId(String theId) {
+  public IReadExecutable<IBaseResource> withId(String theId) {
     return new EcrFhirRetryableRead(readTypedParent.withId(theId), this.client);
   }
 
   @Override
-  public IReadExecutable withIdAndVersion(String theId, String theVersion) {
+  public IReadExecutable<IBaseResource> withIdAndVersion(String theId, String theVersion) {
     throw new NotImplementedOperationException("The requested operation is not implemented");
   }
 
   @Override
-  public IReadExecutable withId(Long theId) {
+  public IReadExecutable<IBaseResource> withId(Long theId) {
     throw new NotImplementedOperationException("The requested operation is not implemented");
   }
 
   @Override
-  public IReadExecutable withId(IIdType theId) {
+  public IReadExecutable<IBaseResource> withId(IIdType theId) {
     throw new NotImplementedOperationException("The requested operation is not implemented");
   }
 
   @Override
-  public IReadExecutable withUrl(String theUrl) {
+  public IReadExecutable<IBaseResource> withUrl(String theUrl) {
     return new EcrFhirRetryableRead(readTypedParent.withId(theUrl), this.client);
   }
 
   @Override
-  public IReadExecutable withUrl(IIdType theUrl) {
+  public IReadExecutable<IBaseResource> withUrl(IIdType theUrl) {
     throw new NotImplementedOperationException("The requested operation is not implemented");
   }
 
   @Override
-  public IClientExecutable<IBaseResource> andLogRequestAndResponse(boolean theLogRequestAndResponse) {
+  public IReadExecutable<IBaseResource> andLogRequestAndResponse(boolean theLogRequestAndResponse) {
     throw new NotImplementedOperationException("The requested operation is not implemented");
   }
 
   @Override
-  public IClientExecutable<IBaseResource> cacheControl(CacheControlDirective theCacheControlDirective) {
+  public IReadExecutable<IBaseResource> cacheControl(CacheControlDirective theCacheControlDirective) {
 
     throw new NotImplementedOperationException("The requested operation is not implemented");
   }
 
   @Override
-  public IClientExecutable<IBaseResource> elementsSubset(String... theElements) {
+  public IReadExecutable<IBaseResource> elementsSubset(String... theElements) {
     throw new NotImplementedOperationException("The requested operation is not implemented");
   }
 
   @Override
-  public IClientExecutable<IBaseResource> encoded(EncodingEnum theEncoding) {
+  public IReadExecutable<IBaseResource> encoded(EncodingEnum theEncoding) {
     throw new NotImplementedOperationException("The requested operation is not implemented");
   }
 
   @Override
-  public IClientExecutable<IBaseResource> encodedJson() {
+  public IReadExecutable<IBaseResource> encodedJson() {
     throw new NotImplementedOperationException("The requested operation is not implemented");
   }
 
   @Override
-  public IClientExecutable<IBaseResource> encodedXml() {
+  public IReadExecutable<IBaseResource> encodedXml() {
     throw new NotImplementedOperationException("The requested operation is not implemented");
   }
 
   @Override
-  public IClientExecutable<IBaseResource> withAdditionalHeader(String theHeaderName, String theHeaderValue) {
+  public IReadExecutable<IBaseResource> withAdditionalHeader(String theHeaderName, String theHeaderValue) {
     throw new NotImplementedOperationException("The requested operation is not implemented");
   }
 
   @Override
-  public Object execute() {
+  public IBaseResource execute() {
     return client
         .getRetryTemplate()
         .execute(
@@ -136,32 +132,32 @@ public class EcrFhirRetryableRead implements IRead, IReadTyped<IBaseResource>, I
   }
 
   @Override
-  public IClientExecutable<IBaseResource> preferResponseType(Class theType) {
+  public IReadExecutable<IBaseResource> preferResponseType(Class theType) {
     throw new NotImplementedOperationException("The requested operation is not implemented");
   }
 
   @Override
-  public IClientExecutable<IBaseResource> preferResponseTypes(List theTypes) {
+  public IReadExecutable<IBaseResource> preferResponseTypes(List theTypes) {
     throw new NotImplementedOperationException("The requested operation is not implemented");
   }
 
   @Override
-  public IClientExecutable<IBaseResource> prettyPrint() {
+  public IReadExecutable<IBaseResource> prettyPrint() {
     throw new NotImplementedOperationException("The requested operation is not implemented");
   }
 
   @Override
-  public IClientExecutable<IBaseResource> summaryMode(SummaryEnum theSummary) {
+  public IReadExecutable<IBaseResource> summaryMode(SummaryEnum theSummary) {
     throw new NotImplementedOperationException("The requested operation is not implemented");
   }
 
   @Override
-  public IClientExecutable accept(String theHeaderValue) {
+  public IReadExecutable<IBaseResource> accept(String theHeaderValue) {
     throw new NotImplementedOperationException("The requested operation is not implemented");
   }
 
   @Override
-  public IReadIfNoneMatch ifVersionMatches(String theVersion) {
+  public IReadIfNoneMatch<IBaseResource> ifVersionMatches(String theVersion) {
     throw new NotImplementedOperationException("The requested operation is not implemented");
   }
 }

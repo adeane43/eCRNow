@@ -1,11 +1,11 @@
-package java.bsa.controller;
+package com.drajer.bsa.controller;
 
 import static org.junit.Assert.assertEquals;
 
-import java.bsa.model.NotificationContext;
-import java.bsa.service.NotificationContextService;
-import java.sof.model.NotificationContextData;
-import test.util.TestUtils;
+import com.drajer.bsa.model.NotificationContext;
+import com.drajer.bsa.service.NotificationContextService;
+import com.drajer.sof.model.NotificationContextData;
+import com.drajer.test.util.TestUtils;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;

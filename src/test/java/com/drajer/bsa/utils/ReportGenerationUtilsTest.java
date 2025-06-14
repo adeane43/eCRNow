@@ -1,10 +1,10 @@
-package java.bsa.utils;
+package com.drajer.bsa.utils;
 
 import static org.junit.Assert.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import ca.uhn.fhir.context.FhirContext;
-import test.simulator.ContentDataSimulator;
+import com.drajer.test.simulator.ContentDataSimulator;
 import java.io.InputStream;
 import java.util.*;
 import org.hl7.fhir.r4.model.*;

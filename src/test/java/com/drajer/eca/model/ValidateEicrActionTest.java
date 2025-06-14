@@ -1,4 +1,4 @@
-package java.eca.model;
+package com.drajer.eca.model;
 
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
@@ -7,10 +7,10 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import java.model.EventTypes.WorkflowEvent;
-import java.ecrapp.service.WorkflowService;
-import java.ecrapp.util.ApplicationUtils;
-import java.sof.model.LaunchDetails;
+import com.drajer.eca.model.EventTypes.WorkflowEvent;
+import com.drajer.ecrapp.service.WorkflowService;
+import com.drajer.ecrapp.util.ApplicationUtils;
+import com.drajer.sof.model.LaunchDetails;
 import java.util.HashSet;
 import java.util.Set;
 import org.hl7.fhir.r4.model.PlanDefinition.ActionRelationshipType;

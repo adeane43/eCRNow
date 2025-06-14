@@ -1,4 +1,4 @@
-package java.bsa.controller;
+package com.drajer.bsa.controller;
 
 public class TestCaseInfo {
 

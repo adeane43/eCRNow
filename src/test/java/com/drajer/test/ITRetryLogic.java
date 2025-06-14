@@ -1,13 +1,13 @@
-package java.test;
+package com.drajer.test;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.model.PatientExecutionState;
-import java.sof.model.LaunchDetails;
-import test.util.TestDataGenerator;
-import test.util.TestUtils;
-import test.util.WireMockHelper;
+import com.drajer.eca.model.PatientExecutionState;
+import com.drajer.sof.model.LaunchDetails;
+import com.drajer.test.util.TestDataGenerator;
+import com.drajer.test.util.TestUtils;
+import com.drajer.test.util.WireMockHelper;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collection;

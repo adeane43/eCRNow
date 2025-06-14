@@ -1,16 +1,16 @@
-package java.test;
+package com.drajer.test;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
-import java.sof.model.LaunchDetails;
-import java.sof.model.R4FhirData;
-import java.sof.service.LoadingQueryService;
-import test.util.TestDataGenerator;
-import test.util.TestUtils;
-import test.util.WireMockHelper;
+import com.drajer.sof.model.LaunchDetails;
+import com.drajer.sof.model.R4FhirData;
+import com.drajer.sof.service.LoadingQueryService;
+import com.drajer.test.util.TestDataGenerator;
+import com.drajer.test.util.TestUtils;
+import com.drajer.test.util.WireMockHelper;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.Arrays;

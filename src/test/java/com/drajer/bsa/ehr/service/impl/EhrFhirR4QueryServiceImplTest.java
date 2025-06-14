@@ -1,4 +1,4 @@
-package java.bsa.ehr.service.impl;
+package com.drajer.bsa.ehr.service.impl;
 
 import static com.helger.commons.mock.CommonsAssert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -9,11 +9,11 @@ import static org.mockito.Mockito.*;
 
 import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.rest.client.api.IGenericClient;
-import java.bsa.auth.AuthorizationUtils;
-import java.bsa.dao.HealthcareSettingsDao;
-import java.bsa.model.KarProcessingData;
-import java.bsa.model.NotificationContext;
-import java.sof.utils.FhirContextInitializer;
+import com.drajer.bsa.auth.AuthorizationUtils;
+import com.drajer.bsa.dao.HealthcareSettingsDao;
+import com.drajer.bsa.model.KarProcessingData;
+import com.drajer.bsa.model.NotificationContext;
+import com.drajer.sof.utils.FhirContextInitializer;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;

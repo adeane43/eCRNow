@@ -1,4 +1,4 @@
-package java.test;
+package com.drajer.test;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
@@ -6,12 +6,12 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.fail;
 
-import java.ecrapp.model.Eicr;
-import java.ecrapp.model.ReportabilityResponse;
-import java.ecrapp.service.impl.EicrServiceImpl;
-import java.sof.model.LaunchDetails;
-import test.util.TestUtils;
-import test.util.WireMockHelper;
+import com.drajer.ecrapp.model.Eicr;
+import com.drajer.ecrapp.model.ReportabilityResponse;
+import com.drajer.ecrapp.service.impl.EicrServiceImpl;
+import com.drajer.sof.model.LaunchDetails;
+import com.drajer.test.util.TestUtils;
+import com.drajer.test.util.WireMockHelper;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import java.io.IOException;
 import java.net.MalformedURLException;

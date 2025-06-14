@@ -1,19 +1,19 @@
-package java.ecrapp.fhir.utils.ecrretry;
+package com.drajer.ecrapp.fhir.utils.ecrretry;
 
 import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.when;
 
 import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.rest.gclient.*;
-import java.model.EventTypes;
-import java.ecrapp.config.SpringConfiguration;
-import java.ecrapp.fhir.utils.FHIRRetryTemplate;
-import java.ecrapp.fhir.utils.FHIRRetryTemplateConfig;
-import java.ecrapp.fhir.utils.RetryableException;
-import java.sof.model.ClientDetails;
-import java.sof.model.LaunchDetails;
-import java.sof.utils.FhirContextInitializer;
-import test.util.TestUtils;
+import com.drajer.eca.model.EventTypes;
+import com.drajer.ecrapp.config.SpringConfiguration;
+import com.drajer.ecrapp.fhir.utils.FHIRRetryTemplate;
+import com.drajer.ecrapp.fhir.utils.FHIRRetryTemplateConfig;
+import com.drajer.ecrapp.fhir.utils.RetryableException;
+import com.drajer.sof.model.ClientDetails;
+import com.drajer.sof.model.LaunchDetails;
+import com.drajer.sof.utils.FhirContextInitializer;
+import com.drajer.test.util.TestUtils;
 import java.util.*;
 import org.hl7.fhir.r4.model.Bundle;
 import org.junit.Before;

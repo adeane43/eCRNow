@@ -1,4 +1,4 @@
-package java.sof.launch;
+package com.drajer.sof.launch;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
@@ -11,11 +11,11 @@ import ca.uhn.fhir.rest.gclient.IRead;
 import ca.uhn.fhir.rest.gclient.IReadExecutable;
 import ca.uhn.fhir.rest.gclient.IReadTyped;
 import ca.uhn.fhir.rest.server.exceptions.ResourceNotFoundException;
-import java.model.EventTypes;
-import java.sof.model.ClientDetails;
-import java.sof.model.LaunchDetails;
-import java.sof.utils.FhirContextInitializer;
-import test.util.TestUtils;
+import com.drajer.eca.model.EventTypes;
+import com.drajer.sof.model.ClientDetails;
+import com.drajer.sof.model.LaunchDetails;
+import com.drajer.sof.utils.FhirContextInitializer;
+import com.drajer.test.util.TestUtils;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import java.io.IOException;

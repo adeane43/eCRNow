@@ -1,4 +1,4 @@
-package java.cdafromdstu2;
+package com.drajer.cdafromdstu2;
 
 import static org.junit.Assert.assertNotNull;
 
@@ -8,7 +8,7 @@ import ca.uhn.fhir.model.dstu2.composite.CodingDt;
 import ca.uhn.fhir.model.dstu2.composite.ResourceReferenceDt;
 import ca.uhn.fhir.model.dstu2.resource.Observation;
 import ca.uhn.fhir.model.primitive.StringDt;
-import java.model.MatchedTriggerCodes;
+import com.drajer.eca.model.MatchedTriggerCodes;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;

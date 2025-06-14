@@ -1,12 +1,12 @@
-package java.test;
+package com.drajer.test;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static org.junit.Assert.assertEquals;
 
-import java.ecrapp.config.SpringConfiguration;
-import java.sof.model.ClientDetails;
-import test.util.TestUtils;
-import test.util.WireMockHandle;
+import com.drajer.ecrapp.config.SpringConfiguration;
+import com.drajer.sof.model.ClientDetails;
+import com.drajer.test.util.TestUtils;
+import com.drajer.test.util.WireMockHandle;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.tomakehurst.wiremock.WireMockServer;
 import java.io.IOException;
@@ -26,7 +26,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;

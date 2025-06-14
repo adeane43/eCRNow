@@ -1,4 +1,4 @@
-package java.ecrapp.util;
+package com.drajer.ecrapp.util;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;

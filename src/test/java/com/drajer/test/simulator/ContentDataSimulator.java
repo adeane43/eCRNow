@@ -1,12 +1,12 @@
-package java.test.simulator;
+package com.drajer.test.simulator;
 
 import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.parser.IParser;
-import java.cdafromr4.CdaMedicationGenerator;
-import java.ecrapp.config.SpringConfiguration;
-import java.ecrapp.util.ApplicationUtils;
-import java.sof.model.LaunchDetails;
-import java.sof.model.R4FhirData;
+import com.drajer.cdafromr4.CdaMedicationGenerator;
+import com.drajer.ecrapp.config.SpringConfiguration;
+import com.drajer.ecrapp.util.ApplicationUtils;
+import com.drajer.sof.model.LaunchDetails;
+import com.drajer.sof.model.R4FhirData;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TimeZone;

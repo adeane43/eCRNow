@@ -1,17 +1,15 @@
-package java.test;
+package com.drajer.test;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static java.lang.Thread.sleep;
 import static org.junit.Assert.*;
 
-import eca.model.*;
-import java.model.EventTypes.JobStatus;
-import java.model.PatientExecutionState;
-import java.sof.model.LaunchDetails;
-import test.util.TestDataGenerator;
-import test.util.WireMockHelper;
+import com.drajer.eca.model.*;
+import com.drajer.eca.model.EventTypes.JobStatus;
+import com.drajer.sof.model.LaunchDetails;
+import com.drajer.test.util.TestDataGenerator;
+import com.drajer.test.util.WireMockHelper;
 import java.io.IOException;
-import java.model.PeriodicUpdateEicrStatus;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.*;

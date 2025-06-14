@@ -1,9 +1,9 @@
-package java.bsa.kar.condition;
+package com.drajer.bsa.kar.condition;
 
-import java.bsa.kar.action.SubmitReport;
-import java.bsa.kar.model.BsaAction;
-import java.bsa.model.KarProcessingData;
-import java.ecrapp.config.SpringConfiguration;
+import com.drajer.bsa.kar.action.SubmitReport;
+import com.drajer.bsa.kar.model.BsaAction;
+import com.drajer.bsa.model.KarProcessingData;
+import com.drajer.ecrapp.config.SpringConfiguration;
 import org.hl7.fhir.r4.model.Expression;
 import org.junit.Test;
 import org.opencds.cqf.cql.evaluator.expression.ExpressionEvaluator;

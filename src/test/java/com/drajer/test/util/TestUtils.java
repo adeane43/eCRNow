@@ -1,4 +1,4 @@
-package java.test.util;
+package com.drajer.test.util;
 
 import ca.uhn.fhir.context.FhirContext;
 import com.fasterxml.jackson.core.type.TypeReference;

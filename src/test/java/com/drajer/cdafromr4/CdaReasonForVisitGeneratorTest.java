@@ -1,9 +1,9 @@
-package java.cdafromr4;
+package com.drajer.cdafromr4;
 
 import static org.junit.Assert.*;
 
-import java.cda.utils.CdaGeneratorConstants;
-import test.util.TestUtils;
+import com.drajer.cda.utils.CdaGeneratorConstants;
+import com.drajer.test.util.TestUtils;
 import org.hl7.fhir.r4.model.Encounter;
 import org.junit.Test;
 
