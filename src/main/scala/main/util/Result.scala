@@ -2,7 +2,7 @@ package main.util
 
 /** 
  * Result type representing either a success or failure.
- * Alias for [[Either[FailureType, SuccessType]]].
+ * Alias for [[Either]].
  */
 type Result[FailureType, SuccessType] = Either[FailureType, SuccessType]
 

@@ -5,14 +5,11 @@ import com.drajer.bsa.ehr.service.EhrQueryService
 import com.drajer.bsa.exceptions.{InvalidLaunchContext, InvalidNotification}
 import com.drajer.bsa.model.{HealthcareSetting, KarProcessingData, NotificationContext, PatientLaunchContext}
 import com.drajer.bsa.service.SubscriptionNotificationReceiver
-import com.drajer.bsa.utils.StartupUtils
 import main.util.{Failure, Result, Success}
-import org.apache.commons.text.StringEscapeUtils
 import org.hl7.fhir.r4.model.{Bundle, CanonicalType, CodeType, Encounter, IntegerType, Meta, Parameters, Reference, Resource, ResourceType}
 import org.hl7.fhir.r4.model.Bundle.{BundleType, HTTPVerb}
 import org.slf4j.{Logger, LoggerFactory}
 import org.springframework.beans.factory.annotation.Value
-import org.springframework.dao.DataIntegrityViolationException
 
 import scala.jdk.CollectionConverters.*
 import java.time.Instant
