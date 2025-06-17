@@ -2,17 +2,19 @@ package main.controllers
 
 import com.drajer.bsa.dao.HealthcareSettingsDao
 import com.drajer.bsa.ehr.service.EhrQueryService
+import com.drajer.bsa.exceptions.{InvalidLaunchContext, InvalidNotification}
 import com.drajer.bsa.model.{HealthcareSetting, KarProcessingData, NotificationContext, PatientLaunchContext}
 import com.drajer.bsa.service.SubscriptionNotificationReceiver
 import com.drajer.bsa.utils.StartupUtils
-import main.util.{Result, Success, Failure}
+import main.util.{Failure, Result, Success}
 import org.apache.commons.text.StringEscapeUtils
-import org.hl7.fhir.r4.model.{Bundle, CanonicalType, CodeType, IntegerType, Meta, Parameters, Reference, Resource, ResourceType}
+import org.hl7.fhir.r4.model.{Bundle, CanonicalType, CodeType, Encounter, IntegerType, Meta, Parameters, Reference, Resource, ResourceType}
 import org.hl7.fhir.r4.model.Bundle.{BundleType, HTTPVerb}
 import org.slf4j.{Logger, LoggerFactory}
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.dao.DataIntegrityViolationException
 
+import scala.jdk.CollectionConverters.*
 import java.time.Instant
 import java.util.{Date, UUID}
 import scala.util.{Try, Failure as TryFailure, Success as TrySuccess}
@@ -29,14 +31,26 @@ case object HealthCareSettingsNotFound extends PatientLaunchResult
 case object UnknownError extends PatientLaunchResult
 
 /** Cannot launch due to conflict (resource already exists) */
-case object Conflict extends PatientLaunchResult
+case object LaunchConflict extends PatientLaunchResult
+
+case object InvalidLaunchContext extends PatientLaunchResult
+case object InvalidNotification extends PatientLaunchResult
 
 /** The token refresh threshold value for refreshing access tokens */
 @Value("${token.refresh.threshold:25}")
 private val tokenRefreshThreshold = null
 private def logger: Logger = LoggerFactory.getLogger(getClass)
 
-def performPatientLaunch(requestId: String, launchContext: PatientLaunchContext)(
+/**
+ * Performs the patient launch operation
+ * @param requestId The request ID for tracking the operation
+ * @param launchContext The launch context containing details for launching the patient encounter
+ * @param hsDao DAO for loading healthcare settings
+ * @param ehrService DAO for querying EHR resources
+ * @param notificationReceiver DAO for
+ * @return
+ */
+def performPatientLaunch(launchContext: PatientLaunchContext, requestId: String, correlationId: String)(
   implicit hsDao: HealthcareSettingsDao,
   ehrService: EhrQueryService,
   notificationReceiver: SubscriptionNotificationReceiver,
@@ -44,14 +58,19 @@ def performPatientLaunch(requestId: String, launchContext: PatientLaunchContext)
   val result = for {
     // Load the HealthCareSetting from the database
     healthcareSetting <- getHealthcareSetting(launchContext.getFhirServerURL)
-    // Construct the KarProcessingData DTO containing
+    // Construct the KarProcessingData DTO
     karProcessingData <- Success(createKarProcessingData(launchContext, healthcareSetting, requestId))
-    resource <- getResource(launchContext, karProcessingData)
+    // Get the resource from the EHR service
+    encounter <- getEncounter(launchContext, karProcessingData)
+    // Create the notification bundle
     notificationBundle <- Success(createNotificationBundle(
       fhirServerUrl = launchContext.getFhirServerURL,
-      resource = resource,
+      encounter = encounter,
       relaunch = false
     ))
+    // Process the notification. No need to use the result for anything here
+    _ <- processNotification(notificationBundle, launchContext, requestId, correlationId)
+    // Return success if everything succeeded
   } yield PatientLaunchSuccess
 
   result.merge
@@ -78,16 +97,20 @@ private def createKarProcessingData(context: PatientLaunchContext, healthcareSet
   kd
 }
 
-private def getResource(launchContext: PatientLaunchContext, karProcessingData: KarProcessingData)(
+private def getEncounter(launchContext: PatientLaunchContext, karProcessingData: KarProcessingData)(
   implicit ehrService: EhrQueryService
-): Result[PatientLaunchResult, Resource] = {
+): Result[PatientLaunchResult, Encounter] = {
   Try(ehrService.getResourceById(karProcessingData, ResourceType.Encounter.toString, launchContext.getEncounterId, true)) match {
+    case TrySuccess(resource: Encounter) => Success(resource)
+    case TrySuccess(resource: Resource) => {
+      logger.error(s"Expected Encounter resource but got ${resource.getResourceType} for encounterId: ${launchContext.getEncounterId}")
+      Failure(UnknownError)
+    }
     case TryFailure(exception) => Failure(UnknownError)
-    case TrySuccess(resource: Resource) => Success(resource)
   }
 }
 
-private def createNotificationBundle(fhirServerUrl: String, resource: Resource, relaunch: Boolean)
+private def createNotificationBundle(fhirServerUrl: String, encounter: Encounter, relaunch: Boolean)
 : Bundle = {
   val nb = new Bundle
 
@@ -162,5 +185,16 @@ private def createNotificationBundle(fhirServerUrl: String, resource: Resource, 
   berpc.setStatus("200")
   nb.addEntry(bec)
 
-  nb.addEntry(new Bundle.BundleEntryComponent().setResource(resource))
+  nb.addEntry(new Bundle.BundleEntryComponent().setResource(encounter))
+}
+
+private def processNotification(notificationBundle: Bundle, launchContext: PatientLaunchContext, requestId: String, correlationId: String)(
+  implicit notificationReceiver: SubscriptionNotificationReceiver
+): Result[PatientLaunchResult, List[KarProcessingData]] = {
+  Try(notificationReceiver.processNotification(notificationBundle, requestId, correlationId, launchContext)) match {
+    case TrySuccess(result) => Success(result.asScala.toList)
+    case TryFailure(exception: InvalidLaunchContext) => Failure(InvalidLaunchContext)
+    case TryFailure(exception: InvalidNotification) => Failure(InvalidNotification)
+    case TryFailure(exception) => Failure(UnknownError)
+  }
 }

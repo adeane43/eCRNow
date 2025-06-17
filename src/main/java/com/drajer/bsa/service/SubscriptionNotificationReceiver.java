@@ -52,4 +52,25 @@ public interface SubscriptionNotificationReceiver {
       PatientLaunchContext launchContext,
       Boolean relaunch)
       throws InvalidLaunchContext, InvalidNotification;
+
+  List<KarProcessingData> processNotification(
+          Bundle notificationBundle,
+          String requestId,
+          String correlationId,
+          PatientLaunchContext launchContext)
+          throws InvalidLaunchContext, InvalidNotification;
+
+  List<KarProcessingData> processRelaunchNotification(
+          Bundle notificationBundle,
+          String requestId,
+          String correlationId,
+          PatientLaunchContext launchContext)
+          throws InvalidLaunchContext, InvalidNotification;
+
+  public List<KarProcessingData> reProcessNotification(
+          Bundle notificationBundle,
+          String requestId,
+          String correlationId,
+          PatientLaunchContext launchContext)
+          throws InvalidLaunchContext, InvalidNotification;
 }

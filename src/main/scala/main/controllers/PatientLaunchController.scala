@@ -7,6 +7,7 @@ import com.drajer.bsa.model.{HealthcareSetting, PatientLaunchContext}
 import com.drajer.bsa.service.{HealthcareSettingsService, SubscriptionNotificationReceiver}
 import com.drajer.bsa.utils.{OperationOutcomeUtil, StartupUtils}
 import jakarta.servlet.http.{HttpServletRequest, HttpServletResponse}
+import main.constants.Headers
 import org.apache.commons.lang3.StringUtils
 import org.apache.commons.text.StringEscapeUtils
 import org.slf4j.{Logger, LoggerFactory}
@@ -33,7 +34,6 @@ class PatientLaunchController {
   private implicit val logger: Logger = LoggerFactory.getLogger(classOf[PatientLaunchController])
 
   private val FHIR_VERSION = "fhirVersion"
-  private val X_REQUEST_ID = "X-Request-ID"
 
   /**
    * Launches a patient instance for processing.
@@ -47,17 +47,19 @@ class PatientLaunchController {
                     request: HttpServletRequest,
                     response: HttpServletResponse)
   : ResponseEntity[AnyRef] = {
-    logPatientLaunch(launchContext, request)
 
     // Awaiting app startup
     if (!StartupUtils.hasAppStarted)
       return PatientLaunchController.appNotStartedResponse()
 
-    val requestId: String = request.getHeader(X_REQUEST_ID)
+    val requestId = StringEscapeUtils.escapeJava(request.getHeader(Headers.X_REQUEST_ID))
+    val correlationId = StringEscapeUtils.escapeJava(request.getHeader(Headers.X_CORRELATION_ID))
+
+    logPatientLaunch(launchContext, requestId)
 
     // Missing X-Request-ID header
     if (StringUtils.isEmpty(requestId)) {
-      logger.error(s"Request ID is missing in the request header: $X_REQUEST_ID")
+      logger.error(s"Request ID is missing in the request header: ${Headers.X_REQUEST_ID}")
 
       return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY)
         .body(OperationOutcomeUtil.createErrorOperationOutcome(
@@ -65,13 +67,17 @@ class PatientLaunchController {
         ))
     }
 
+    // TODO: Refactor to use Result[] type for better error handling,
+    // and extract some of this duplicate logic around creating the operation outcomes,
+    // status code etc
+
     // Perform the launch and handle the result
-    performPatientLaunch(requestId, launchContext) match {
-      case PatientLaunchSuccess() =>
+    performPatientLaunch(launchContext, requestId, correlationId) match {
+      case PatientLaunchSuccess =>
         logger.info("Patient launch was successful for patientId: {}, encounterId: {}, requestId: {}",
           StringEscapeUtils.escapeJava(launchContext.getPatientId),
           StringEscapeUtils.escapeJava(launchContext.getEncounterId),
-          StringEscapeUtils.escapeJava(request.getHeader(X_REQUEST_ID))
+          requestId
         )
 
         ResponseEntity.ok().body(OperationOutcomeUtil.createSuccessOperationOutcome(
@@ -80,22 +86,39 @@ class PatientLaunchController {
 
       case HealthCareSettingsNotFound =>
         logger.error("Healthcare setting not found for URL: {}", launchContext.getFhirServerURL)
+
         ResponseEntity.status(HttpStatus.NOT_FOUND).body(
           OperationOutcomeUtil.createErrorOperationOutcome(
             s"Healthcare setting not found for URL: ${launchContext.getFhirServerURL}")
         )
+
+      case LaunchConflict => ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY)
+        .body(OperationOutcomeUtil.createErrorOperationOutcome(
+          "Unable to launch Patient Instance - Patient encounter already exists in the system"
+        ))
+
+      // TODO: App doesn't currently handle these cases explicitly
+      case InvalidNotification => genericError()
+      case InvalidLaunchContext => genericError()
+      case UnknownError => genericError()
     }
   }
 
-  private def logPatientLaunch(launchContext: PatientLaunchContext,
-                               request: HttpServletRequest): Unit = {
+  private def genericError(): ResponseEntity[Object] = {
+    ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(
+      OperationOutcomeUtil.createErrorOperationOutcome(
+        s"Unable to launch Patient Instance due to an unexpected error")
+    )
+  }
+
+  private def logPatientLaunch(launchContext: PatientLaunchContext, requestId: String): Unit = {
     logger.info(
       "Patient launch request received for fhirServerUrl: {}, patientId: {}, encounterId: {}, ehrLaunchContext: {}, requestId: {},  throttleContext: {}",
       StringEscapeUtils.escapeJava(launchContext.getFhirServerURL),
       StringEscapeUtils.escapeJava(launchContext.getPatientId),
       StringEscapeUtils.escapeJava(launchContext.getEncounterId),
       launchContext.getEhrLaunchContext.size,
-      StringEscapeUtils.escapeJava(request.getHeader(X_REQUEST_ID)),
+      requestId,
       launchContext.getThrottleContext)
   }
 }

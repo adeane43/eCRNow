@@ -92,8 +92,8 @@ public class SubscriptionUtils {
 
   public static NotificationContext getNotificationContext(
       Bundle bundle,
-      HttpServletRequest request,
-      HttpServletResponse response,
+      String requestId,
+      String correlationId,
       Boolean relaunch,
       Boolean reprocess,
       PatientLaunchContext launchContext)
@@ -216,28 +216,25 @@ public class SubscriptionUtils {
                 }
               }
 
-              String xRequestId = request.getHeader("X-Request-ID");
-              String xCorrelationId = request.getHeader("X-Correlation-ID");
-
-              if (xRequestId != null
-                  && xRequestId.length() > 0
-                  && xCorrelationId != null
-                  && xCorrelationId.length() > 0) {
+              if (requestId != null
+                  && requestId.length() > 0
+                  && correlationId != null
+                  && correlationId.length() > 0) {
 
                 // Setup the attributes to be different.
-                nc.setxRequestId(xRequestId);
-                nc.setxCorrelationId(xCorrelationId);
-              } else if (xRequestId != null && xRequestId.length() > 0) {
+                nc.setxRequestId(requestId);
+                nc.setxCorrelationId(correlationId);
+              } else if (requestId != null && requestId.length() > 0) {
                 // Set both to the same since the other one  is null.
-                nc.setxRequestId(xRequestId);
-                nc.setxCorrelationId(xRequestId);
-              } else if (xCorrelationId != null && xCorrelationId.length() > 0) {
+                nc.setxRequestId(requestId);
+                nc.setxCorrelationId(requestId);
+              } else if (correlationId != null && correlationId.length() > 0) {
                 // Set both to the same since the other one  is null.
 
-                nc.setxCorrelationId(xCorrelationId);
-                nc.setxRequestId(xCorrelationId);
+                nc.setxCorrelationId(correlationId);
+                nc.setxRequestId(correlationId);
               } else {
-                String guid = java.util.UUID.randomUUID().toString();
+                String guid = UUID.randomUUID().toString();
                 nc.setxRequestId(guid);
                 nc.setxCorrelationId(guid);
               }
