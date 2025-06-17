@@ -2,6 +2,8 @@ package com.drajer.bsa.dao;
 
 import com.drajer.bsa.kar.model.KnowledgeArtifactStatus;
 import com.drajer.bsa.model.HealthcareSetting;
+import scala.util.Try;
+
 import java.util.List;
 
 /**

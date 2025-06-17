@@ -17,6 +17,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import scala.util.Failure;
+import scala.util.Success;
+import scala.util.Try;
 
 /**
  *

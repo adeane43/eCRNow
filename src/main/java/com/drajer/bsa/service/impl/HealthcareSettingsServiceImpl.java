@@ -1,12 +1,21 @@
 package com.drajer.bsa.service.impl;
 
+import com.drajer.bsa.controller.PatientLaunchController;
 import com.drajer.bsa.dao.HealthcareSettingsDao;
 import com.drajer.bsa.model.HealthcareSetting;
 import com.drajer.bsa.service.HealthcareSettingsService;
 import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.actuate.health.Health;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import scala.util.Either;
+import scala.util.Failure;
+import scala.util.Success;
+import scala.util.Try;
 
 /**
  *
@@ -24,6 +33,8 @@ import org.springframework.transaction.annotation.Transactional;
 public class HealthcareSettingsServiceImpl implements HealthcareSettingsService {
 
   @Autowired HealthcareSettingsDao hsDao;
+
+  private final Logger logger = LoggerFactory.getLogger(HealthcareSettingsServiceImpl.class);
 
   /**
    * Method to create or update a HealthcareSetting.
