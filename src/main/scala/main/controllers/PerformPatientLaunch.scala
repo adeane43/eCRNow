@@ -59,9 +59,9 @@ def performPatientLaunch(launchContext: PatientLaunchContext, requestId: String,
     // Load the HealthCareSetting from the database
     healthcareSetting <- getHealthcareSetting(launchContext.getFhirServerURL)
     // Construct the KarProcessingData DTO
-    karProcessingData <- Success(createKarProcessingData(launchContext, healthcareSetting, requestId))
+    karProcessingData <- Success(createKarProcessingData(healthcareSetting, requestId))
     // Get the resource from the EHR service
-    encounter <- getEncounter(launchContext, karProcessingData)
+    encounter <- getEncounter(launchContext.getEncounterId, karProcessingData)
     // Create the notification bundle
     notificationBundle <- Success(createNotificationBundle(
       fhirServerUrl = launchContext.getFhirServerURL,
@@ -86,7 +86,7 @@ private def getHealthcareSetting(url: String)(
   }
 }
 
-private def createKarProcessingData(context: PatientLaunchContext, healthcareSetting: HealthcareSetting, requestId: String)
+private def createKarProcessingData(healthcareSetting: HealthcareSetting, requestId: String)
 : KarProcessingData = {
   // TODO: Make it a case class
   val kd = new KarProcessingData
@@ -97,13 +97,13 @@ private def createKarProcessingData(context: PatientLaunchContext, healthcareSet
   kd
 }
 
-private def getEncounter(launchContext: PatientLaunchContext, karProcessingData: KarProcessingData)(
+private def getEncounter(encounterId: String, karProcessingData: KarProcessingData)(
   implicit ehrService: EhrQueryService
 ): Result[PatientLaunchResult, Encounter] = {
-  Try(ehrService.getResourceById(karProcessingData, ResourceType.Encounter.toString, launchContext.getEncounterId, true)) match {
+  Try(ehrService.getResourceById(karProcessingData, ResourceType.Encounter.toString, encounterId, true)) match {
     case TrySuccess(resource: Encounter) => Success(resource)
     case TrySuccess(resource: Resource) => {
-      logger.error(s"Expected Encounter resource but got ${resource.getResourceType} for encounterId: ${launchContext.getEncounterId}")
+      logger.error(s"Expected Encounter resource but got ${resource.getResourceType} for encounterId: $encounterId")
       Failure(UnknownError)
     }
     case TryFailure(exception) => Failure(UnknownError)
