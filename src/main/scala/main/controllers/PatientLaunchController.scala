@@ -1,6 +1,5 @@
 package main.controllers
 
-import com.drajer.bsa.controller.PatientLaunchController
 import com.drajer.bsa.dao.HealthcareSettingsDao
 import com.drajer.bsa.ehr.service.EhrQueryService
 import com.drajer.bsa.model.{HealthcareSetting, PatientLaunchContext}
@@ -13,7 +12,7 @@ import org.apache.commons.text.StringEscapeUtils
 import org.slf4j.{Logger, LoggerFactory}
 import org.springframework.beans.factory.annotation.{Autowired, Value}
 import org.springframework.http.{HttpStatus, ResponseEntity}
-import org.springframework.web.bind.annotation.{CrossOrigin, PostMapping, RequestBody}
+import org.springframework.web.bind.annotation.{CrossOrigin, PostMapping, RequestBody, RequestHeader}
 
 @CrossOrigin
 @PostMapping(value = Array("/api/launchPatient"))
@@ -43,17 +42,32 @@ class PatientLaunchController {
    * @param response      the HTTP response
    * @return a ResponseEntity indicating the result of the launch operation
    */
-  def launchPatient(@RequestBody launchContext: PatientLaunchContext,
-                    request: HttpServletRequest,
-                    response: HttpServletResponse)
-  : ResponseEntity[AnyRef] = {
+
+  /**
+   * Launches a patient instance for processing.
+   *
+   * @param launchContext the context containing details for launching the patient
+   * @param request       the HTTP request
+   * @param response      the HTTP response
+   * @return a ResponseEntity indicating the result of the launch operation
+   */
+  @CrossOrigin
+  @PostMapping(value = Array("/api/launchPatient"))
+  def launchPatient
+  (
+    @RequestBody launchContext: PatientLaunchContext,
+    @RequestHeader(Headers.X_REQUEST_ID) requestIdHeaderValue: String,
+    @RequestHeader(Headers.X_CORRELATION_ID) correlationIdHeaderValue: String,
+    request: HttpServletRequest,
+    response: HttpServletResponse
+  ): ResponseEntity[AnyRef] = {
 
     // Awaiting app startup
     if (!StartupUtils.hasAppStarted)
       return PatientLaunchController.appNotStartedResponse()
 
-    val requestId = StringEscapeUtils.escapeJava(request.getHeader(Headers.X_REQUEST_ID))
-    val correlationId = StringEscapeUtils.escapeJava(request.getHeader(Headers.X_CORRELATION_ID))
+    val requestId = StringEscapeUtils.escapeJava(requestIdHeaderValue)
+    val correlationId = StringEscapeUtils.escapeJava(correlationIdHeaderValue)
 
     logPatientLaunch(launchContext, requestId)
 

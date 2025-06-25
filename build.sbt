@@ -5,7 +5,7 @@ description := "FHIR App to perform electronic case reporting (ecr) by convertin
 
 scalaVersion := "3.7.1"
 ThisBuild / scalaVersion := "3.7.1"
-javacOptions ++= Seq("--release", "24")
+javacOptions ++= Seq("--release", "17")
 
 // Source directories for mixed Java/Scala
 Compile / unmanagedSourceDirectories ++= Seq(
