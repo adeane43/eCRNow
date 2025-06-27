@@ -2,8 +2,8 @@ package main.controllers
 
 import com.drajer.bsa.dao.HealthcareSettingsDao
 import com.drajer.bsa.ehr.service.EhrQueryService
-import com.drajer.bsa.model.{HealthcareSetting, PatientLaunchContext}
-import com.drajer.bsa.service.{HealthcareSettingsService, SubscriptionNotificationReceiver}
+import com.drajer.bsa.model.{PatientLaunchContext}
+import com.drajer.bsa.service.{SubscriptionNotificationReceiver}
 import com.drajer.bsa.utils.{OperationOutcomeUtil, StartupUtils}
 import jakarta.servlet.http.{HttpServletRequest, HttpServletResponse}
 import main.constants.Headers
@@ -33,15 +33,6 @@ class PatientLaunchController {
   private implicit val logger: Logger = LoggerFactory.getLogger(classOf[PatientLaunchController])
 
   private val FHIR_VERSION = "fhirVersion"
-
-  /**
-   * Launches a patient instance for processing.
-   *
-   * @param launchContext the context containing details for launching the patient
-   * @param request       the HTTP request
-   * @param response      the HTTP response
-   * @return a ResponseEntity indicating the result of the launch operation
-   */
 
   /**
    * Launches a patient instance for processing.
@@ -81,13 +72,10 @@ class PatientLaunchController {
         ))
     }
 
-    // TODO: Refactor to use Result[] type for better error handling,
-    // and extract some of this duplicate logic around creating the operation outcomes,
-    // status code etc
-
     // Perform the launch and handle the result
     performPatientLaunch(launchContext, requestId, correlationId) match {
-      case PatientLaunchSuccess =>
+      // Success
+      case Right(_) =>
         logger.info("Patient launch was successful for patientId: {}, encounterId: {}, requestId: {}",
           StringEscapeUtils.escapeJava(launchContext.getPatientId),
           StringEscapeUtils.escapeJava(launchContext.getEncounterId),
@@ -98,23 +86,26 @@ class PatientLaunchController {
           "Patient Instance launched for processing successfully"
         ))
 
-      case HealthCareSettingsNotFound =>
-        logger.error("Healthcare setting not found for URL: {}", launchContext.getFhirServerURL)
+      // Failure
+      case Left(error: PatientLaunchError) => error match {
+        case HealthCareSettingsNotFound =>
+          logger.error("Healthcare setting not found for URL: {}", launchContext.getFhirServerURL)
 
-        ResponseEntity.status(HttpStatus.NOT_FOUND).body(
-          OperationOutcomeUtil.createErrorOperationOutcome(
-            s"Healthcare setting not found for URL: ${launchContext.getFhirServerURL}")
-        )
+          ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+            OperationOutcomeUtil.createErrorOperationOutcome(
+              s"Healthcare setting not found for URL: ${launchContext.getFhirServerURL}")
+          )
 
-      case LaunchConflict => ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY)
-        .body(OperationOutcomeUtil.createErrorOperationOutcome(
-          "Unable to launch Patient Instance - Patient encounter already exists in the system"
-        ))
+        case LaunchConflict => ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY)
+          .body(OperationOutcomeUtil.createErrorOperationOutcome(
+            "Unable to launch Patient Instance - Patient encounter already exists in the system"
+          ))
 
-      // TODO: App doesn't currently handle these cases explicitly
-      case InvalidNotification => genericError()
-      case InvalidLaunchContext => genericError()
-      case UnknownError => genericError()
+        // TODO: App doesn't currently handle these cases explicitly
+        case InvalidNotification => genericError()
+        case InvalidLaunchContext => genericError()
+        case UnknownError => genericError()
+      }
     }
   }
 

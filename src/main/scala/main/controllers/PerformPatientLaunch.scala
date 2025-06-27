@@ -5,7 +5,6 @@ import com.drajer.bsa.ehr.service.EhrQueryService
 import com.drajer.bsa.exceptions.{InvalidLaunchContext, InvalidNotification}
 import com.drajer.bsa.model.{HealthcareSetting, KarProcessingData, NotificationContext, PatientLaunchContext}
 import com.drajer.bsa.service.SubscriptionNotificationReceiver
-import main.util.{Failure, Result, Success}
 import org.hl7.fhir.r4.model.{Bundle, CanonicalType, CodeType, Encounter, IntegerType, Meta, Parameters, Reference, Resource, ResourceType}
 import org.hl7.fhir.r4.model.Bundle.{BundleType, HTTPVerb}
 import org.slf4j.{Logger, LoggerFactory}
@@ -14,24 +13,21 @@ import org.springframework.beans.factory.annotation.Value
 import scala.jdk.CollectionConverters.*
 import java.time.Instant
 import java.util.{Date, UUID}
-import scala.util.{Try, Failure as TryFailure, Success as TrySuccess}
+import scala.util.{Try, Failure, Success}
 
-sealed trait PatientLaunchResult
-
-/** Represents a successful patient launch operation */
-case object PatientLaunchSuccess extends PatientLaunchResult
+sealed trait PatientLaunchError
 
 /** The HealthCareSettings were not found in the database */
-case object HealthCareSettingsNotFound extends PatientLaunchResult
+case object HealthCareSettingsNotFound extends PatientLaunchError
 
 /** Unknown exception occurred */
-case object UnknownError extends PatientLaunchResult
+case object UnknownError extends PatientLaunchError
 
 /** Cannot launch due to conflict (resource already exists) */
-case object LaunchConflict extends PatientLaunchResult
+case object LaunchConflict extends PatientLaunchError
 
-case object InvalidLaunchContext extends PatientLaunchResult
-case object InvalidNotification extends PatientLaunchResult
+case object InvalidLaunchContext extends PatientLaunchError
+case object InvalidNotification extends PatientLaunchError
 
 /** The token refresh threshold value for refreshing access tokens */
 @Value("${token.refresh.threshold:25}")
@@ -51,16 +47,16 @@ def performPatientLaunch(launchContext: PatientLaunchContext, requestId: String,
   implicit hsDao: HealthcareSettingsDao,
   ehrService: EhrQueryService,
   notificationReceiver: SubscriptionNotificationReceiver,
-): PatientLaunchResult = {
-  val result = for {
+): Either[PatientLaunchError, Unit] = {
+  for {
     // Load the HealthCareSetting from the database
-    healthcareSetting <- getHealthcareSetting(launchContext.getFhirServerURL)
+    healthcareSetting: HealthcareSetting <- getHealthcareSetting(launchContext.getFhirServerURL)
     // Construct the KarProcessingData DTO
-    karProcessingData <- Success(createKarProcessingData(healthcareSetting, requestId))
+    karProcessingData: KarProcessingData <- Right(createKarProcessingData(healthcareSetting, requestId))
     // Get the resource from the EHR service
-    encounter <- getEncounter(launchContext.getEncounterId, karProcessingData)
+    encounter: Encounter <- getEncounter(launchContext.getEncounterId, karProcessingData)
     // Create the notification bundle
-    notificationBundle <- Success(createNotificationBundle(
+    notificationBundle: Bundle <- Right(createNotificationBundle(
       fhirServerUrl = launchContext.getFhirServerURL,
       encounter = encounter,
       relaunch = false
@@ -68,18 +64,16 @@ def performPatientLaunch(launchContext: PatientLaunchContext, requestId: String,
     // Process the notification. No need to use the result for anything here
     _ <- processNotification(notificationBundle, launchContext, requestId, correlationId)
     // Return success if everything succeeded
-  } yield PatientLaunchSuccess
-
-  result.merge
+  } yield()
 }
 
 private def getHealthcareSetting(url: String)(
   implicit hsDao: HealthcareSettingsDao
-): Result[PatientLaunchResult, HealthcareSetting] = {
+): Either[PatientLaunchError, HealthcareSetting] = {
   Try(hsDao.getHealthcareSettingByUrl(url)) match {
-    case TryFailure(exception) => Failure(UnknownError)
-    case TrySuccess(null) => Failure(HealthCareSettingsNotFound)
-    case TrySuccess(hs) => Success(hs)
+    case Failure(exception) => Left(UnknownError)
+    case Success(null) => Left(HealthCareSettingsNotFound)
+    case Success(hs) => Right(hs)
   }
 }
 
@@ -96,14 +90,14 @@ private def createKarProcessingData(healthcareSetting: HealthcareSetting, reques
 
 private def getEncounter(encounterId: String, karProcessingData: KarProcessingData)(
   implicit ehrService: EhrQueryService
-): Result[PatientLaunchResult, Encounter] = {
+): Either[PatientLaunchError, Encounter] = {
   Try(ehrService.getResourceById(karProcessingData, ResourceType.Encounter.toString, encounterId, true)) match {
-    case TrySuccess(resource: Encounter) => Success(resource)
-    case TrySuccess(resource: Resource) => {
+    case Success(resource: Encounter) => Right(resource)
+    case Success(resource: Resource) => {
       logger.error(s"Expected Encounter resource but got ${resource.getResourceType} for encounterId: $encounterId")
-      Failure(UnknownError)
+      Left(UnknownError)
     }
-    case TryFailure(exception) => Failure(UnknownError)
+    case Failure(exception) => Left(UnknownError)
   }
 }
 
@@ -187,11 +181,11 @@ private def createNotificationBundle(fhirServerUrl: String, encounter: Encounter
 
 private def processNotification(notificationBundle: Bundle, launchContext: PatientLaunchContext, requestId: String, correlationId: String)(
   implicit notificationReceiver: SubscriptionNotificationReceiver
-): Result[PatientLaunchResult, List[KarProcessingData]] = {
+): Either[PatientLaunchError, List[KarProcessingData]] = {
   Try(notificationReceiver.processNotification(notificationBundle, requestId, correlationId, launchContext)) match {
-    case TrySuccess(result) => Success(result.asScala.toList)
-    case TryFailure(exception: InvalidLaunchContext) => Failure(InvalidLaunchContext)
-    case TryFailure(exception: InvalidNotification) => Failure(InvalidNotification)
-    case TryFailure(exception) => Failure(UnknownError)
+    case Success(result) => Right(result.asScala.toList)
+    case Failure(exception: InvalidLaunchContext) => Left(InvalidLaunchContext)
+    case Failure(exception: InvalidNotification) => Left(InvalidNotification)
+    case Failure(exception) => Left(UnknownError)
   }
 }

@@ -92,7 +92,8 @@ libraryDependencies ++= Seq(
   "com.h2database" % "h2" % "2.3.232" % Test,
   "com.github.tomakehurst" % "wiremock-jre8" % "3.0.1" % Test,
   "com.fasterxml.jackson.dataformat" % "jackson-dataformat-yaml" % "2.19.0",
-  "org.hibernate" % "hibernate-core" % "5.4.0.Final"
+  "org.hibernate" % "hibernate-core" % "5.4.0.Final",
+  "org.hibernate" % "hibernate-jpamodelgen" % "5.4.0.Final"
 )
 
 // Main class for Spring Boot
